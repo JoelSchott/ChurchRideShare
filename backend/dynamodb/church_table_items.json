@@ -1,0 +1,34 @@
+{
+    "Church": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "ID": {"N": "0"},
+                    "Name": {"S": "Mosaic"},
+                    "Description": {"S": "Baptist Reformed Arminian"},
+                    "Address": {"S": "1600 Bridgeschool Rd, Rolla, MO, 65401"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "ID": {"N": "1"},
+                    "Name": {"S": "Greentree"},
+                    "Description": {"S": "Non-denominational"},
+                    "Address": {"S": "800 Greentree Rd, Rolla, MO, 65401"}
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "ID": {"N": "2"},
+                    "Name": {"S": "Ridgeview"},
+                    "Description": {"S": "Christian Church"},
+                    "Address": {"S": "806 Ridgeview Road, Rolla, MO, 65401"}
+                }
+            }
+        }
+    ]
+}
