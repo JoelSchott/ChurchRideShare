@@ -1,0 +1,42 @@
+.pic{
+  width:100%;
+  margin: 64px;
+  border-radius: 45px;
+}
+
+.descTitle{
+  margin-top: 64px;
+  margin-bottom: 16px;
+}
+
+.descTxt{
+  margin: 0px 90px;
+  margin-bottom: 32px;
+}
+
+.midDivider{
+  background-color: var(--secondary);
+}
+
+// Responsive
+@media screen and (max-width: 600px) {
+  .midText{
+    width: 100%;
+    text-align: center;
+  }
+
+  .pic{
+    width:100%;
+    margin: 0px;
+    border-radius: 0px;
+  }
+
+  .descTitle{
+    margin-top: 16px;
+  }
+  
+  .descTxt{
+    margin: 16px 12px;
+  }
+  
+}
