@@ -1,0 +1,27 @@
+@import "utilities/variables";
+
+body,h1,h2{
+    font-family: 'Noto Sans';
+}
+
+h1{
+    font-family: 'Playfair Display';
+    font-size: 60px;
+    color: var(--black);
+}
+
+body{
+    font-size: 20px; 
+    color: var(--black);
+}
+
+span{
+    font-family: 'Inter';
+}
+
+body, html {
+    height: 100%;
+}
+p {line-height: 2}
+
+html {background-color: var(--background);}
