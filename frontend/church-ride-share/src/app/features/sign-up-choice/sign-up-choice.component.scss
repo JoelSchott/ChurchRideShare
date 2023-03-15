@@ -1,0 +1,58 @@
+.sign-up-choice-page {
+    margin: 15px 120px;
+    
+    .w3-row {
+        display: flex;
+    }
+
+    .w3-col {
+        padding: 15px;
+        display: flex;
+    }
+
+    .choice {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;
+        max-width: 500px;
+        color: white;
+        text-decoration: none;
+    
+        &--provider {
+            background-color: var(--primary);
+        }
+    
+        &--admin {
+            background-color: var(--secondary);
+        }
+    
+        img {
+            margin: 15px;
+            width: calc(100% - 30px);
+            border-radius: 15px;
+        }
+    
+        .text-wrapper {
+            flex: 1;
+            margin: 0 15px 15px 15px;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: var(--primaryAccent);
+        }
+    }
+      
+    // Responsive
+    @media screen and (max-width: 900px) {
+        margin: 15px 60px;
+    }
+
+    @media screen and (max-width: 600px) {
+        margin: 15px 0;
+
+        .w3-row {
+            display: initial;
+        }
+    }    
+}

@@ -9,6 +9,7 @@ import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { PrimaryButtonComponent } from './shared/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from './shared/secondary-button/secondary-button.component';
+import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SecondaryButtonComponent } from './shared/secondary-button/secondary-bu
     NavComponent,
     FooterComponent,
     PrimaryButtonComponent,
-    SecondaryButtonComponent
+    SecondaryButtonComponent,
+    SignUpChoiceComponent
   ],
   imports: [
     BrowserModule,
