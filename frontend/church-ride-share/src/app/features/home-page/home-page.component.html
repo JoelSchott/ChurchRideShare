@@ -1,6 +1,6 @@
 <!-- Home Page -->
-<div class="w3-animate-opacity">
-  <!-- Who Are We Section -->
+<!-- Who Are We Section -->
+<div class="container w3-animate-opacity">
   <div class="w3-row w3-center">
     <div class="w3-col s12 m6">
       <img class="pic" src="/assets/BirdsViewOfCars.jpg">
@@ -17,40 +17,45 @@
         in our best hopes that !app! helps resolve this issue.</p>
     </div>
   </div>
+</div>
   <!-- How Do I Get Started -->
-  <div class="w3-row midDivider">
-    <div class="w3-col s12 m6" id="s2text">
+<div class="w3-row midDivider w3-center w3-animate-opacity">
+  <div class="container w3-row w3-center midDivider">
+    <div class="w3-col s12 w3-hide-medium w3-hide-large">
+        <img class="pic" src="/assets/CrossQuote.png">
+    </div>
+    <div class="w3-col s12 m6">
       <h1 class="descTitle w3-center"><b>How Do I Get Started?</b></h1>
       <p class="descTxt w3-center">No sign up needed! If you are looking for a ride to 
         church, click the button below and provide some needed pickup 
         information. Once submitted, a <b>Ride Provider</b> will contact you about 
         the details.</p>
-        <primary-button text="Find A Ride"></primary-button>
-      </div>
-      <div class="w3-col s12 m5 w3-hide-small" id="s2pic">
-        <img class="pic" src="/assets/CrossQuote.png">
-      </div>
+      <primary-button text="Find A Ride" [routerLink]="'/find-ride'"></primary-button>
     </div>
-    <!-- How Does This Work -->
-    <div class="w3-row">
-      <div class="w3-col s12 m5">
-        <img class="pic" src="/assets/RoofOfTaxi.jpg">
-      </div>
-      <div class="w3-col s12 m7">
-        <h1 class="descTitle w3-center"><b>How Does This Work</b></h1>
-        <p class="descTxt"><b>Ride Providers</b> are church members who will be 
-        providing the means of transportation. You can become a Ride 
-        Provider by creating an account and applying to your 
-        corresponding church. Upon approval, you will be able to view 
-        and accept ride requests.</p>
+    <div class="w3-col s12 m5 w3-hide-small">
+      <img class="pic" src="/assets/CrossQuote.png">
+    </div>
+  </div>
+</div>
+<!-- How Does This Work -->
+<div class="container w3-row w3-animate-opacity">
+  <div class="w3-col s12 m5">
+    <img class="pic" src="/assets/RoofOfTaxi.jpg">
+  </div>
+  <div class="w3-col s12 m7">
+    <h1 class="descTitle w3-center"><b>How Does This Work</b></h1>
+    <p class="descTxt descTxt--bottom"><b>Ride Providers</b> are church members who will be 
+    providing the means of transportation. You can become a Ride 
+    Provider by creating an account and applying to your 
+    corresponding church. Upon approval, you will be able to view 
+    and accept ride requests.</p>
 
-        <p class="descTxt"><b>Church Admins</b> are created by church staff. This
-        allows the management of details on !app! such as service times, 
-        locations, and website links. This information is available 
-        to both Riders and Ride Providers. These Church Admins also manage
-        who can and can’t participate as Ride Providers for their 
-        church.</p>
-        <primary-button text="Sign Up"></primary-button>
-      </div>
-    </div>
+    <p class="descTxt"><b>Church Admins</b> are created by church staff. This
+    allows the management of details on !app! such as service times, 
+    locations, and website links. This information is available 
+    to both Riders and Ride Providers. These Church Admins also manage
+    who can and can’t participate as Ride Providers for their 
+    church.</p>
+    <primary-button text="Sign Up" [routerLink]="'/sign-up'"></primary-button>
+  </div>
 </div>

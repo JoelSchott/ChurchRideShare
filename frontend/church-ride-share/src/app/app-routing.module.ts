@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './features/home-page/home-page.component';
 import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.component';
+import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.component';
 
 const routes: Routes = [
-    { path: '', component: HomePageComponent },
-    { path: 'signup', component: SignUpChoiceComponent }
+    { path: 'home', component: HomePageComponent },
+    { path: 'sign-up', component: SignUpChoiceComponent },
+    { path: 'find-ride', component: FindRidePageComponent },
+    { path: '', component: HomePageComponent },
+    { path: '**', component: HomePageComponent },
+      // { path: '**', component: PageNotFoundComponent }
   ];
 
 @NgModule({
