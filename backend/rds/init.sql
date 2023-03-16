@@ -26,7 +26,7 @@ create table Users (
     password varchar(1024) not null
 );
 
-create table RideGivers (
+create table Drivers (
     churchId char(36) references Churches(id),
     username varchar(80) references Users(username),
     primary key (churchId, username)

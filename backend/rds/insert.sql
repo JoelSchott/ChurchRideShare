@@ -64,13 +64,13 @@ insert into Admins values (
     "ba227e8b-a40b-43fa-9ebe-c059ac10c27b", "Mark"
 );
 
-insert into RideGivers values (
+insert into Drivers values (
     "5b8c73d3-9e6a-4b8c-b44c-6637132ec60e", "Luke"
 );
-insert into RideGivers values (
+insert into Drivers values (
     "d0f31d23-cd03-4d72-8d2e-934ccd980071", "Luke"
 );
-insert into RideGivers values (
+insert into Drivers values (
     "ba227e8b-a40b-43fa-9ebe-c059ac10c27b", "Paul"
 );
 
