@@ -1,50 +1,51 @@
-#search-bar{
+#filter-text-box{
   border-radius: 8px;
   border: 3px solid var(--tertiary);
-  margin-top: 16px
+  // margin-top: 16px;
+  margin: 16px 0px;
 }
 
 .inline{
   max-width:400px;
   margin:auto;
 }
-.input-icons i {
-  position: absolute;
-  margin-top: 22px;
-  margin-left: 10px;
-}
 
 .input-icons {
   width: 100%;
-  margin-bottom: 10px;
 }
 
-.icon {
+.magnify-icon {
+  position: absolute;
+  margin-top: 22px;
+  margin-left: 10px;
   padding: 10px;
   min-width: 40px;
   color: var(--tertiary);
 }
 
-i:hover {
+.filter-icon:hover {
   cursor: pointer;
-}
-
-.filter-icon {
-  margin-left: 10px;
-  padding: 10px;
-  // padding-left: 23%;
-  min-width: 40px;
-  color: red;
 }
 
 .input-field {
   width: 100%;
   padding: 10px;
   text-align: left;
-  margin: 3px;
-  // text-indent: 40px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.input-field:focus{
+  outline: 2px solid var(--secondary);
+}
+
+.filter-icon {
+  position: absolute;
+  margin-top: 22px;
+  left: calc(50% + 152px); //Kinda hacky
+  padding: 10px;
+  min-width: 40px;
+  color: var(--tertiary);
 }
 
 // Responsive
@@ -55,6 +56,16 @@ i:hover {
     text-align: left;
     margin: 3px;
     width: auto;
-    text-indent: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .filter-icon {
+    position: absolute;
+    margin-top: 22px;
+    left: calc(50% + 108px); //Kinda hacky
+    padding: 10px;
+    min-width: 40px;
+    color: var(--tertiary);
   }
 }

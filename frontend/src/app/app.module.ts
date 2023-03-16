@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { PrimaryButtonComponent } from './shared/primary-button/primary-button.c
 import { SecondaryButtonComponent } from './shared/secondary-button/secondary-button.component';
 import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.component';
 import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.component';
+import { ChurchSearchFilterPipe } from './shared/church-search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.
     PrimaryButtonComponent,
     SecondaryButtonComponent,
     SignUpChoiceComponent,
-    FindRidePageComponent
+    FindRidePageComponent,
+    ChurchSearchFilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

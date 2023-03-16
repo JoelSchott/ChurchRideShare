@@ -3,10 +3,25 @@
     <div class="w3-col s12">
       <form class="inline">
         <div class="input-icons">
-            <i class="fa-solid fa-magnifying-glass icon" [routerLink]="'/home'"></i>
-            <input class="input-field" type="text" id="search-bar">
+            <i class="fa-solid fa-magnifying-glass magnify-icon"></i>
+            <input type="text" class="form-control input-field" id="filter-text-box" 
+            placeholder="Find a Church"
+            [(ngModel)]="searchText"
+            name="SearchBox">
             <i class="fa-solid fa-filter filter-icon"></i>
         </div>
-  </form>
+      </form>
+    </div>
   </div>
+  <div *ngFor="let church of churches | churchSearchFilter: searchText">
+    <!-- Temporary list view for search troubleshooting -->
+    <!-- Replace with church display component once made -->
+    <ul>
+      <li >{{church.name}}<span><br></span>
+        {{church.address}}<span><br></span>
+        {{church.serviceTimes}}<span><br></span>
+        {{church.website}}<span><br></span>
+        <span><br>----------<br></span></li>
+    </ul>
+  </div> 
 </div>
