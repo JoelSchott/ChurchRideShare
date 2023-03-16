@@ -6,12 +6,12 @@ body,h1,h2{
 
 h1{
     font-family: 'Playfair Display';
-    font-size: 60px;
+    font-size: 40px;
     color: var(--black);
 }
 
 body{
-    font-size: 20px; 
+    font-size: 16px; 
     color: var(--black);
 }
 
@@ -25,3 +25,8 @@ body, html {
 p {line-height: 2}
 
 html {background-color: var(--background);}
+
+.container{
+    max-width: 1200px;
+    margin: auto;
+}
