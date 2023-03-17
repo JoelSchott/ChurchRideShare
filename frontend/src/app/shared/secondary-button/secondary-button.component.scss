@@ -15,8 +15,7 @@
   transition: 0.3s;
 
   margin: auto;
-  display: grid;  
-  margin-bottom: 64px;
+  display: grid;
 }
 
 .button:hover {background-color: var(--secondary); opacity: 1;}
@@ -25,11 +24,4 @@
   background-color: var(--secondary);
   box-shadow: 0 2px #666;
   transform: translateY(2px);
-}
-
-// Responsive
-@media screen and (max-width: 600px) {
-  .button{
-    margin-bottom: 32px;
-  }
 }

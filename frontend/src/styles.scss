@@ -1,4 +1,10 @@
 @import "utilities/variables";
+@import "utilities/mixins";
+
+* {
+    box-sizing: border-box;
+}
+
 
 body,h1,h2{
     font-family: 'Noto Sans';
@@ -27,6 +33,6 @@ p {line-height: 2}
 html {background-color: var(--background);}
 
 .container{
-    max-width: 1200px;
+    max-width: 1100px;
     margin: auto;
 }
