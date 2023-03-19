@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Church } from 'src/app/shared/church';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'find-ride-page',
@@ -8,50 +8,46 @@ import { Church } from 'src/app/shared/church';
 })
 
 export class FindRidePageComponent implements OnInit {
-  churches: Churches = [];
   searchText: String = "";
+  public churchInfo: any;
 
-  // Simulate API
-  rawJSON=
-  {
-    "churches": [
-        {
-            "id": "1", 
-            "name": "Mosaic",
-            "address": "1600 Bridge School Rd Rolla, MO 65401",
-            "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
-            "website": "mosaicrolla.com"  
+  // // Simulate API
+  // rawJSON=
+  // {
+  //   "churches": [
+  //       {
+  //           "id": "1", 
+  //           "name": "Mosaic",
+  //           "address": "1600 Bridge School Rd Rolla, MO 65401",
+  //           "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
+  //           "website": "mosaicrolla.com"  
           
-        },
-        {
-          "id": "1", 
-          "name": "Moasaic",
-          "address": "1600 Bridge School Rd Rolla, MO 65401",
-          "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
-          "website": "mosaicrolla.com"  
+  //       },
+  //       {
+  //         "id": "1", 
+  //         "name": "Moasaic",
+  //         "address": "1600 Bridge School Rd Rolla, MO 65401",
+  //         "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
+  //         "website": "mosaicrolla.com"  
         
-      },
-        {
-            "id": "2",
-            "name": "Riverview",
-            "address": "989 State Hwy 42, Osage Beach, MO 65065",
-            "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"],
-            "website": "rbclake.org"
-        },
-    ]
-  }
+  //     },
+  //       {
+  //           "id": "2",
+  //           "name": "Riverview",
+  //           "address": "989 State Hwy 42, Osage Beach, MO 65065",
+  //           "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"],
+  //           "website": "rbclake.org"
+  //       },
+  //   ]
+  // }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    // Put JSON data into custon array of church objects
-    let c: any = this.rawJSON.churches;
-    for(const i in c){
-      let church: Church = { id: c[i].id, name: c[i].name, address: c[i].address, serviceTimes: c[i].serviceTimes, website: c[i].website };
-      this.churches.push(church);
-    }
+    const url: string = 'https://prcj5gwv06.execute-api.us-east-2.amazonaws.com/test1/churches';
+    this.http.get(url).subscribe((response) => {
+      this.churchInfo = response;
+    });
   }
 
 }
-
-type Churches = Array<Church>;

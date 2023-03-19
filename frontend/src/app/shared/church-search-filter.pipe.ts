@@ -8,7 +8,7 @@ export class ChurchSearchFilterPipe implements PipeTransform {
 
   transform(churches: Array<Church>, searchText: String) {
     // Leaves alone if no filter
-    if(churches.length === 0 || searchText === ''){
+    if(searchText === ''){ //churches.length === 0 || 
       return churches;
     }
     // Filters churches based on name
