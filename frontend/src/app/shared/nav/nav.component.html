@@ -1,28 +1,27 @@
 <!-- Navbar (sticky top) -->
-<div class="w3-container w3-padding-16 w3-animate-opacity topNav">
-  <div class="w3-row w3-center">
-    <div class="w3-col s4">
-      <a routerLink="/home">
-        <i class="w3-xlarge fa fa-home home">
-          <span class="w3-hide-small signInText">Home</span>
-        </i>
-      </a>
-    </div>
-    <div class="w3-col s4"><p></p></div>
-    <div class="w3-col s4">
-      <a routerLink="/sign-up" class="w3-margin-right">
-        <i class="w3-xlarge fa fa-car signIn">
-          <span class="w3-hide-small signInText">Sign Up</span>
-        </i>
-      </a>
-      <a routerLink="/sign-in">
-        <i class="w3-xlarge fa fa-user signIn">
-          <span class="w3-hide-small signInText">Sign In</span>
-        </i>
-      </a>
+<nav class="navbar navbar-expand-lg navbar-dark w3-animate-opacity topNav">
+  <div class="container">
+    <a routerLink="/home" class="navbar-brand">
+      <i class="fs-4 fa fa-home icon">
+        <span class="d-none d-sm-inline linkText">Home</span>
+      </i>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto">
+        <a routerLink="/sign-up" class="nav-link">
+          <i class="fs-4 fa fa-car icon">
+            <span class="linkText">Sign Up</span>
+          </i>
+        </a>
+        <a routerLink="/sign-in" class="nav-link">
+          <i class="fs-4 fa fa-user icon">
+            <span class="linkText">Sign In</span>
+          </i>
+        </a>
+      </div>
     </div>
   </div>
-
-    
-</div>
-  
+</nav>
