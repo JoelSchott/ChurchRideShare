@@ -44,7 +44,7 @@ export class FindRidePageComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    const url: string = 'https://prcj5gwv06.execute-api.us-east-2.amazonaws.com/test1/churches';
+    const url: string = 'https://xyae35uw4b.execute-api.us-east-2.amazonaws.com/test1/church';
     this.http.get(url).subscribe((response) => {
       this.churchInfo = response;
     });
