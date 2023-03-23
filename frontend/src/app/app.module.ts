@@ -13,6 +13,7 @@ import { SecondaryButtonComponent } from './shared/secondary-button/secondary-bu
 import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.component';
 import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.component';
 import { ChurchSearchFilterPipe } from './shared/church-search-filter.pipe';
+import { ChurchDisplayCardComponent } from './shared/church-display-card/church-display-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ChurchSearchFilterPipe } from './shared/church-search-filter.pipe';
     SignUpChoiceComponent,
     FindRidePageComponent,
     ChurchSearchFilterPipe,
+    ChurchDisplayCardComponent,
   ],
   imports: [
     BrowserModule,

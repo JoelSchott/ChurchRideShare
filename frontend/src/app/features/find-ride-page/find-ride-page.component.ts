@@ -10,37 +10,8 @@ import { HttpClient } from '@angular/common/http';
 export class FindRidePageComponent implements OnInit {
   searchText: String = "";
   public churchInfo: any;
-
-  // // Simulate API
-  // rawJSON=
-  // {
-  //   "churches": [
-  //       {
-  //           "id": "1", 
-  //           "name": "Mosaic",
-  //           "address": "1600 Bridge School Rd Rolla, MO 65401",
-  //           "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
-  //           "website": "mosaicrolla.com"  
-          
-  //       },
-  //       {
-  //         "id": "1", 
-  //         "name": "Moasaic",
-  //         "address": "1600 Bridge School Rd Rolla, MO 65401",
-  //         "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"], 
-  //         "website": "mosaicrolla.com"  
-        
-  //     },
-  //       {
-  //           "id": "2",
-  //           "name": "Riverview",
-  //           "address": "989 State Hwy 42, Osage Beach, MO 65065",
-  //           "serviceTimes": ["Sunday at 9:30 am", "Sunday at 11:00am"],
-  //           "website": "rbclake.org"
-  //       },
-  //   ]
-  // }
-
+  public websiteInfo: any;
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -48,6 +19,14 @@ export class FindRidePageComponent implements OnInit {
     this.http.get(url).subscribe((response) => {
       this.churchInfo = response;
     });
+
   }
+
+  // public getWebImg(websiteUrl: string){
+  //   const metaUrl: string = 'http://api.linkpreview.net/?key=123456&q=https://'+ websiteUrl;
+  //   this.http.get(metaUrl).subscribe((response) => {
+  //     return response;
+  //   });
+  // }
 
 }

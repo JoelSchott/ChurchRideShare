@@ -1,0 +1,48 @@
+.church-display-card {
+  padding: 16px;
+
+  p {
+    line-height: 1.4;
+  }
+
+  a{
+    color: var(--white);
+  }
+
+  .church:hover{
+    transition: box-shadow .3s;
+    box-shadow: 0 0 11px rgba(33,33,33,.8); 
+  }
+
+  .church {
+    height: 100%;
+    border-radius: 16px;
+    color: var(--white);
+    text-decoration: none;
+    background-color: var(--secondary);
+
+    .image-container {
+      img {
+        border-radius: 16px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .text-wrapper {
+      flex: 1;
+      margin: 16px;
+      padding: 16px;
+      border-radius: 16px;
+    
+      &--desc{
+        flex: 1 80px; // To prevent flex from freaking out with the overflow (mobile)
+        height: 160px;
+        overflow: auto; 
+      }
+    }
+    .secondaryBackground {
+      background-color: var(--secondaryAccent);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<!-- Church Display Card Component -->
+<div class="church-display-card">
+  <a class="row church align-items-center"> 
+    <div class="col col-12 col-lg-5 image-container">
+      <img src={{this.imageUrl}}>
+    </div>
+    <div class="col col-12 col-lg-7 text-wrapper secondaryBackground">
+      <h2><strong>{{church?.name}}</strong></h2>
+      <p><strong>Address:</strong><br>
+        {{church?.street}}<br>
+        {{church?.city}}, {{church?.state}} {{church?.zipCode}}
+      </p>
+      <p><strong>Website:</strong><br>
+        <a href="{{church?.website}}" target="_blank">{{church?.website}}</a>
+      </p>
+    </div>
+    <div class="col col-12 col-lg-8 text-wrapper text-wrapper--desc secondaryBackground">
+      <p class="desc"><strong>Description:</strong><br>
+      {{church?.description}}</p>
+    </div>
+    <div class="col col-12 col-lg-4 text-wrapper">
+      <primary-button text="Pickup Availability"></primary-button>
+    </div>
+  </a>
+</div>
