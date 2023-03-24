@@ -46,3 +46,14 @@
     }
   }
 }
+
+.btn-primary{
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  opacity: .8 !important;
+  transition: 0.3s !important;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:visited{
+  // background-color: #3c1b64 !important;
+  opacity: 1 !important;
+}
