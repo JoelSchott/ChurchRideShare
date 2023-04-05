@@ -1,0 +1,224 @@
+<div class="account-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills flex-column mt-3">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#account-details">Account Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#username">Change Username</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#password">Change Password</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#service-dates">Change Service Dates and Times</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#church-address">Change Church Address</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-admins">Manage Admins</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-givers">Manage Ride Givers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-requests">Manage Ride Requests</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content mt-3">
+          <div class="tab-pane fade show active" id="account-details">
+            <h1>Account Details</h1>
+            <p>Here you can view and edit your account information.</p>
+          </div>
+          <div class="tab-pane fade" id="username">
+            <h1>Change Username</h1>
+            <form>
+              <div class="mb-3">
+                <label for="new-username" class="form-label">New Username</label>
+                <input type="text" class="form-control" id="new-username">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="password">
+            <h1>Change Password</h1>
+            <form>
+              <div class="mb-3">
+                <label for="current-password" class="form-label">Current Password</label>
+                <input type="password" class="form-control" id="current-password">
+              </div>
+              <div class="mb-3">
+                <label for="new-password" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="new-password">
+              </div>
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirm-password">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="service-dates">
+            <h1>Change Service Dates and Times</h1>
+            <form>
+              <div class="mb-3">
+                <label for="service-date" class="form-label">Service Date</label>
+                <input type="date" class="form-control" id="service-date">
+              </div>
+              <div class="mb-3">
+                <label for="service-time" class="form-label">Service Time</label>
+                <input type="time" class="form-control" id="service-time">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="church-address">
+            <h1>Change Church Address</h1>
+            <form>
+              <div class="mb-3">
+                <label for="church-street" class="form-label">Street Address</label>
+                <input type="text" class="form-control" id="church-street">
+              </div>
+              <div class="mb-3">
+                <label for="church-city" class="form-label">City</label>
+                <input type="text" class="form-control" id="church-city">
+              </div>
+              <div class="mb-3">
+                <label for="church-state" class="form-label">State</label>
+                <input type="text" class="form-control" id="church-state">
+              </div>
+              <div class="mb-3">
+                <label for="church-zip" class="form-label">Zip Code</label>
+                <input type="text" class="form-control" id="church-zip">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="manage-admins">
+            <h1>Manage Admins</h1>
+            <p>Here you can view and manage the other admins for your church's account.</p>
+            <!-- Table for listing admins -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>johndoe@example.com</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>janesmith@example.com</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Form for adding new admin -->
+            <form>
+              <h3>Add New Admin</h3>
+              <div class="mb-3">
+                <label for="admin-name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="admin-name">
+              </div>
+              <div class="mb-3">
+                <label for="admin-email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="admin-email">
+              </div>
+              <button type="submit" class="btn btn-primary">Add Admin</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="manage-ride-givers">
+            <h1>Manage Ride Givers</h1>
+            <p>Here you can view and manage the ride givers for your church's events.</p>
+            <!-- Table for listing ride givers -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>123-456-7890</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>987-654-3210</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Form for adding new ride giver -->
+            <form>
+              <h3>Add New Ride Giver</h3>
+              <div class="mb-3">
+                <label for="ride-giver-name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="ride-giver-name">
+              </div>
+              <div class="mb-3">
+                <label for="ride-giver-phone" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="ride-giver-phone">
+              </div>
+              <button type="submit" class="btn btn-primary">Add Ride Giver</button>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="manage-ride-requests">
+            <h1>Manage Ride Requests</h1>
+            <p>Here you can view and manage the ride requests for your church's events.</p>
+            <!-- Table for listing ride requests -->
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Phone Number</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Doe</td>
+                  <td>123-456-7890</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-success me-2">Accept</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Reject</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>987-654-3210</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-success me-2">Accept</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">Reject</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

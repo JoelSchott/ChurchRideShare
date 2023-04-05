@@ -14,6 +14,7 @@ import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.
 import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.component';
 import { ChurchSearchFilterPipe } from './shared/church-search-filter.pipe';
 import { ChurchDisplayCardComponent } from './shared/church-display-card/church-display-card.component';
+import { AccountPageComponent } from './features/account-page/account-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ChurchDisplayCardComponent } from './shared/church-display-card/church-
     FindRidePageComponent,
     ChurchSearchFilterPipe,
     ChurchDisplayCardComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserModule,
