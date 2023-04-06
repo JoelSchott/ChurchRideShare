@@ -16,16 +16,17 @@
     </div>
     <div class="col col-12 col-lg-8 text-wrapper text-wrapper--desc secondaryBackground">
       <p class="desc"><strong>Description:</strong><br>
-      {{church?.description}}</p>
+      {{church?.description}}<br><br>
+      {{church?.id}}<br></p>
     </div>
     <div class="col col-12 col-lg-4 text-wrapper">
-      <primary-button text="Pickup Availability" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"></primary-button>
+      <primary-button text="Pickup Availability" data-bs-toggle="modal" [attr.data-bs-target] = "'#' + church?.id + 'modal'"></primary-button>
     </div>
   </a>
 </div>
 
 <!-- Time Select Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="{{church?.id}}modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -40,10 +41,7 @@
             <!-- Inputs -->
             <label for="form-select" class="form-label">Service Times</label>
             <select class="form-select" aria-label="Default select example">
-               <!-- Come back and implement *ngFor loop of checks for every service time -->
-              <option value="1">Sunday 9:30am</option>
-              <option value="2">Sunday 11:00am</option>
-              <option value="3">Wednesday 7:00pm</option>
+              <option *ngFor="let service of churchServices">{{timeDisplay(service?.startTime)}} ({{service?.description}})</option>
             </select>
           </div>
           <div class="col-md-12"><legend><br>Personal Information</legend></div>
