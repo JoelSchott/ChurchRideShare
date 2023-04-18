@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Church } from '../church';
 import { HttpClient } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'church-display-card',
@@ -13,11 +14,16 @@ export class ChurchDisplayCardComponent implements OnInit {
   public webData: any;
   public imageUrl: string = "/assets/default_church_icon.png"; //Need license for commercial use
   public churchServices: any;
+  public today= new Date();
+  public jstoday = '';
 
-  //RECONFIGURE WHEN AUTH IMPLEMENTED
-  public isSignedIn = false;
+  //----------RECONFIGURE WHEN AUTH IMPLEMENTED----------
+  public isSignedIn = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.jstoday = formatDate(this.today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
+  }
+
 
   ngOnInit(): void { 
     // If no image in database, assign default image
@@ -86,31 +92,33 @@ export class ChurchDisplayCardComponent implements OnInit {
 
   onUserSubmit(data: any){
     let url = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests";
-    let headers = {"Content-Type": "application/json"}
+    let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
-        "username" : "Testing",
-        "personCount": data.personCount,
-        "street": data.street,
-        "city": data.city,
-        "state": data.state,        
-        "zipCode": data.zipCode,
-        "description": data.description,
+        "username" : "tim",
+        // "personCount": data.personCount,
+        // "street": data.street,
+        // "city": data.city,
+        // "state": data.state,        
+        // "zipCode": data.zipCode,
+        // "description": data.description,
         "serviceId": data.serviceId,
+        "requestTime": this.jstoday,
     }
-    // let response = requests.post(url, headers=headers, data=json.dumps(data));
 
     console.warn(formattedData);
-    // this.http.post(url)
+    // this.http.post(url, formattedData, {'headers':headers}).subscribe(
+    //   (response) => console.log(response),
+    //   (error) => console.log(error)
+    // )  
   }
 
   onGuestSubmit(data: any){
     let url = "NEEDURL!";
     let headers = {"Content-Type": "application/json"}
     let formattedData = {
-        "username" : "Testing",
-        // "firstName": data.firstName,
-        // "lastName": data.lastName,
-        // "phoneNumber": data.phoneNumber,
+        "firstName": data.firstName,
+        "lastName": data.lastName,
+        "phoneNumber": data.phoneNumber,
         "personCount": data.personCount,
         "street": data.street,
         "city": data.city,
@@ -118,23 +126,14 @@ export class ChurchDisplayCardComponent implements OnInit {
         "zipCode": data.zipCode,
         "description": data.description,
         "serviceId": data.serviceId,
+        "requestTime": this.jstoday,
     }
-    // let response = requests.post(url, headers=headers, data=json.dumps(data));
 
     console.warn(formattedData);
-    // this.http.post(url)
+    // this.http.post(url, formattedData, {'headers':headers}).subscribe(
+    //   (response) => console.log(response),
+    //   (error) => console.log(error)
+    // )  
   }
- 
-  // For website metadata (picture) api
-  // Probably won't use because of limited requests alotted
-  // public getWebImg(websiteUrl: string | undefined){
-  //   const metaUrl: string = 'http://api.linkpreview.net/?key=cc9dc107564bdb5b97979ef0ce45b374&q=' + websiteUrl;
-  //   this.http.get(metaUrl).subscribe((response) => {
-  //     this.webData = response;
-  //     console.log("HERE: " + this.webData.image);
-  //   });
-    
-  //   return this.webData;
-  // }
 
 }
