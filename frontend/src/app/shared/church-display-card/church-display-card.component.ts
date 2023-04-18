@@ -14,6 +14,9 @@ export class ChurchDisplayCardComponent implements OnInit {
   public imageUrl: string = "/assets/default_church_icon.png"; //Need license for commercial use
   public churchServices: any;
 
+  //RECONFIGURE WHEN AUTH IMPLEMENTED
+  public isSignedIn = false;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void { 
@@ -79,6 +82,47 @@ export class ChurchDisplayCardComponent implements OnInit {
         break;
     }    
     return dayOfWeek + " " + hours + ":" + formatedMin + amOrPm;
+  }
+
+  onUserSubmit(data: any){
+    let url = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests";
+    let headers = {"Content-Type": "application/json"}
+    let formattedData = {
+        "username" : "Testing",
+        "personCount": data.personCount,
+        "street": data.street,
+        "city": data.city,
+        "state": data.state,        
+        "zipCode": data.zipCode,
+        "description": data.description,
+        "serviceId": data.serviceId,
+    }
+    // let response = requests.post(url, headers=headers, data=json.dumps(data));
+
+    console.warn(formattedData);
+    // this.http.post(url)
+  }
+
+  onGuestSubmit(data: any){
+    let url = "NEEDURL!";
+    let headers = {"Content-Type": "application/json"}
+    let formattedData = {
+        "username" : "Testing",
+        // "firstName": data.firstName,
+        // "lastName": data.lastName,
+        // "phoneNumber": data.phoneNumber,
+        "personCount": data.personCount,
+        "street": data.street,
+        "city": data.city,
+        "state": data.state,        
+        "zipCode": data.zipCode,
+        "description": data.description,
+        "serviceId": data.serviceId,
+    }
+    // let response = requests.post(url, headers=headers, data=json.dumps(data));
+
+    console.warn(formattedData);
+    // this.http.post(url)
   }
  
   // For website metadata (picture) api
