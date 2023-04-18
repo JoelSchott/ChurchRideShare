@@ -84,14 +84,22 @@ insert into AdminRequests values (
     "paul", "5b8c73d3-9e6a-4b8c-b44c-6637132ec60e", "Can the worst of sinners be an admin?"
 );
 
+insert into Riders values (
+    "tim", 1, "MO", "Rolla", "123 The Way", "65401", "Take me to church please"
+);
+insert into Riders values (
+    "matt2", 2, "MO", "Rolla", "27 Your Rest", "65401", "I would like to come too"
+);
+
 insert into UserRideRequests values (
-    "cbfb7439-9ced-477b-a5d2-084f1e755e14", "tim", 1, "MO", "Rolla", "123 The Way", "65401", 
-    "Take me to church please", "1dd17191-9f19-435e-8772-9850ae77e299", null, '2023-02-14 08:30:12', null
+    "cbfb7439-9ced-477b-a5d2-084f1e755e14", "tim", "1dd17191-9f19-435e-8772-9850ae77e299", null, 
+    '2023-02-14 08:30:12', null
 );
 insert into UserRideRequests values (
-    "9bd85139-e3f3-4fb9-9e1f-3062401bfb6d", "matt2", 2, "MO", "Rolla", "27 Your Rest", "65401",
-    "I would like to come too", "66c61054-a15b-4a33-a334-dd0f5d6e3480", "luke", '2023-01-09 22:12:00', '2023-01-10 04:10:10'
+    "9bd85139-e3f3-4fb9-9e1f-3062401bfb6d", "matt2", "66c61054-a15b-4a33-a334-dd0f5d6e3480", 
+    "luke", '2023-01-09 22:12:00', '2023-01-10 04:10:10'
 );
+
 insert into GuestRideRequests values (
     "31995d4c-d6da-464a-b5a5-c9b063c73fe6", "John", "Piper", "987987987", 1, "MO", "Rolla", "222 By Enjoying", "65401",
     "It would be so much fun", "4b9b3b5a-19b2-4853-affa-93384e355c6c", null, "2023-01-19 20:55:45", null
@@ -100,4 +108,3 @@ insert into GuestRideRequests values (
     "8ad9779c-1359-41f7-996b-b48e6baa7349", "Hebrew", "Children", "321321321", 3, "MO", "Rolla", "100 Narrow Path", "65401",
     "Can we please come?", "36b1880c-790f-466a-87c5-8a08de4f2a3f", "luke", "2023-03-01 10:01:12", "2023-03-02 08:25:15"
 );
-

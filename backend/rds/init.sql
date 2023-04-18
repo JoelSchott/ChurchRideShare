@@ -40,8 +40,7 @@ create table Admins (
     primary key (churchId, username)
 );
 
-create table UserRideRequests (
-    id char(36) primary key,
+create table Riders (
     username varchar(80) references Users(username),
     personCount integer not null,
     state char(2) not null,
@@ -49,6 +48,12 @@ create table UserRideRequests (
     street varchar(80) not null,
     zipCode char(5) not null,
     description varchar(1024),
+    primary key (username)
+);
+
+create table UserRideRequests (
+    id char(36) primary key,
+    username varchar(80) references Riders(username),
     serviceId char(36) not null references Services(id),
     acceptedBy varchar(80) references Users(username),
     requestTime datetime not null,
