@@ -1,9 +1,11 @@
 export class Church{
   id?: number; 
   name?: string;
-  address?: string;
+  state?: string;
+  city?: string;
+  street?: string;
+  zipCode?: string;
   description?: string;
-  serviceTimes?: Array<String>;
+  imageExtension?: string;
   website?: string;
-  pic?: string;
 }

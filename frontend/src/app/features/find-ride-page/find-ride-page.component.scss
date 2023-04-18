@@ -1,3 +1,15 @@
+@import "../../../utilities/mixins";
+
+.section {
+  // padding-top: 64px;
+  // padding-bottom: 64px;
+  background-color: var(--background);
+
+  &:nth-child(even) {
+    background-color: var(--secondary);
+  }
+}
+
 #filter-text-box{
   border-radius: 8px;
   border: 3px solid var(--tertiary);
@@ -49,21 +61,11 @@
 }
 
 // Responsive
-@media screen and (max-width: 600px) {
-  .input-field {
-    width: 100%;
-    padding: 10px;
-    text-align: left;
-    margin: 3px;
-    width: auto;
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-
+@include responsive(sm) {
   .filter-icon {
     position: absolute;
     margin-top: 22px;
-    left: calc(50% + 108px); //Kinda hacky
+    left: calc(50% + 128px); //Kinda hacky
     padding: 10px;
     min-width: 40px;
     color: var(--tertiary);

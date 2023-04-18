@@ -1,11 +1,12 @@
-<div class="container w3-animate-opacity">
-  <div class="w3-row w3-center">
-    <div class="w3-col s12">
+<div class="section">
+  <div class="container">
+    <div class="row">
+    <div class="col-12">
       <form class="inline">
         <div class="input-icons">
             <i class="fa-solid fa-magnifying-glass magnify-icon"></i>
-            <input type="text" class="form-control input-field" id="filter-text-box" 
-            placeholder="Find a Church"
+            <input type="text" class="input-field" id="filter-text-box" 
+            placeholder=""
             [(ngModel)]="searchText"
             name="SearchBox">
             <i class="fa-solid fa-filter filter-icon"></i>
@@ -13,15 +14,9 @@
       </form>
     </div>
   </div>
-  <div *ngFor="let church of churches | churchSearchFilter: searchText">
-    <!-- Temporary list view for search troubleshooting -->
-    <!-- Replace with church display component once made -->
-    <ul>
-      <li >{{church.name}}<span><br></span>
-        {{church.address}}<span><br></span>
-        {{church.serviceTimes}}<span><br></span>
-        {{church.website}}<span><br></span>
-        <span><br>----------<br></span></li>
-    </ul>
-  </div> 
+  <div class="row justify-content-center">
+    <div class="col col-12 col-md-12 col-lg-6 " *ngFor="let church of churchInfo | churchSearchFilter: searchText">
+      <church-display-card [church]="church"></church-display-card>
+    </div> 
+  </div>
 </div>

@@ -1,63 +1,58 @@
 .sign-up-choice-page {
-    
-    .w3-row {
-        display: flex;
+  background-color: var(--background);
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  .col {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .choice {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    color: var(--white);
+    text-decoration: none;
+
+    &--provider {
+      background-color: var(--primary);
     }
 
-    .w3-col {
-        padding: 15px;
-        display: flex;
+    &--admin {
+      background-color: var(--secondary);
     }
 
-    .choice {
-        display: flex;
-        flex-direction: column;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 15px;
-        max-width: 500px;
-        color: var(--white);
-        text-decoration: none;
-    
-        &--provider {
-            background-color: var(--primary);
-        }
-    
-        &--admin {
-            background-color: var(--secondary);
-        }
-    
-        img {
-            margin: 15px;
-            width: calc(100% - 30px);
-            border-radius: 15px;
-        }
-    
-        .text-wrapper {
-            flex: 1;
-            margin: 0 15px 15px 15px;
-            padding: 15px;
-            border-radius: 15px;
-            &--provider {
-                background-color: var(--primaryAccent);
-            }
-        
-            &--admin {
-                background-color: var(--secondaryAccent);
-            }
-        }
-    }
-      
-    // Responsive
-    @media screen and (max-width: 900px) {
-        margin: 15px 60px;
+    .image-container {
+      margin: 16px;
+      width: calc(100% - 32px);
+      height: 0;
+      padding-bottom: 75%; /* creates a 4:3 aspect ratio */
+      position: relative;
+
+      img {
+        border-radius: 16px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
-    @media screen and (max-width: 600px) {
-        margin: 15px 0;
+    .text-wrapper {
+      flex: 1;
+      margin: 0 16px 16px 16px;
+      padding: 16px;
+      border-radius: 16px;
 
-        .w3-row {
-            display: initial;
-        }
-    }    
+      &--provider {
+        background-color: var(--primaryAccent);
+      }
+
+      &--admin {
+        background-color: var(--secondaryAccent);
+      }
+    }
+  }
 }
