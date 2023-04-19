@@ -1,5 +1,9 @@
 .footer{
   background-color: var(--tertiary);
+
+  &:nth-child(even) {
+    background-color: var(--tertiary);
+  }
   margin-top: auto;
 }
 

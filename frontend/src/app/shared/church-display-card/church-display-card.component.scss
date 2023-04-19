@@ -1,3 +1,5 @@
+@import "../../../utilities/mixins";
+
 .church-display-card {
   padding: 16px;
 
@@ -43,6 +45,18 @@
     }
     .secondaryBackground {
       background-color: var(--secondaryAccent);
+    }
+  }
+}
+
+@include responsive(sm) {
+  .church-display-card {
+    .church{
+      .text-wrapper {
+        &--desc{
+          flex: 1 auto; // To prevent flex from freaking out with the overflow (mobile)
+        }
+      }
     }
   }
 }

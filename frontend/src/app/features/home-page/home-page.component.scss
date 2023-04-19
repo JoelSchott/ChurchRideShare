@@ -52,10 +52,11 @@
 
 @include responsive(xs) {
   .section {
-    padding: 0;
+    overflow: hidden;
+    padding: 0px;
 
     .container {
-      padding: 0;
+      padding: 0px;
     }
   }
 

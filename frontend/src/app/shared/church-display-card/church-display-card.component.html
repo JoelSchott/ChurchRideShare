@@ -16,16 +16,17 @@
     </div>
     <div class="col col-12 col-lg-8 text-wrapper text-wrapper--desc secondaryBackground">
       <p class="desc"><strong>Description:</strong><br>
-      {{church?.description}}</p>
+      {{church?.description}}<br><br>
+      {{church?.id}}<br></p>
     </div>
     <div class="col col-12 col-lg-4 text-wrapper">
-      <primary-button text="Pickup Availability" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"></primary-button>
+      <primary-button text="Request Driver" data-bs-toggle="modal" [attr.data-bs-target] = "'#' + church?.id + 'modal'"></primary-button>
     </div>
   </a>
 </div>
 
-<!-- Time Select Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Signed In Time Select Modal -->
+<div class="modal fade" id="{{church?.id}}modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="isSignedIn">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,56 +36,106 @@
       <div class="modal-body">
         <!-- WHY ISN'T VALIDATION WORKING?? -->
         <!-- https://getbootstrap.com/docs/5.3/forms/validation/ -->
-        <form class="row">
+        <form #servicePost='ngForm' (ngSubmit)="onUserSubmit(servicePost.value)" class="row">
           <div class="col col-md-12">
             <!-- Inputs -->
-            <label for="form-select" class="form-label">Service Times</label>
-            <select class="form-select" aria-label="Default select example">
-               <!-- Come back and implement *ngFor loop of checks for every service time -->
-              <option value="1">Sunday 9:30am</option>
-              <option value="2">Sunday 11:00am</option>
-              <option value="3">Wednesday 7:00pm</option>
+            <label for="inputServiceTime" class="form-label">Service Times</label>
+            <select class="form-select" id="inputServiceTime" aria-label="select example" name="serviceId" ngModel>
+              <option *ngFor="let service of churchServices" [ngValue]=service?.id>{{timeDisplay(service?.startTime)}} ({{service?.description}})</option>
+            </select>
+          </div>
+          <div class="col-md-12"><legend><br>Personal Information</legend></div>
+          <div class="mb-3 col-md-6">
+            <label for="inputPersonCount" class="form-label">Person Count</label>
+            <input type="number" class="form-control" id="inputPersonCount" required="" name="personCount" ngModel>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputStreet" class="form-label">Street</label>
+            <input type="text" class="form-control" id="inputStreet" required="" name="street" ngModel>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="inputCity" required="" name="city" ngModel>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputState" class="form-label">State</label>
+            <input type="text" class="form-control" id="inputState" maxlength="2" required="" name="state" ngModel>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="inputZip" class="form-label">Zip Code</label>
+            <input type="text" class="form-control" id="inputZip" maxlength="5" required="" name="zipCode" ngModel>
+          </div>
+          <div class="mb-3 col-md-12">
+            <label for="inputDescription" class="form-label">Description</label>
+            <input type="text" class="form-control" id="inputDescription" name="description" ngModel>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Request Driver</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Guest Time Select Modal -->
+<div class="modal fade" id="{{church?.id}}modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="!isSignedIn">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Select Pickup Availability</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- WHY ISN'T VALIDATION WORKING?? -->
+        <!-- https://getbootstrap.com/docs/5.3/forms/validation/ -->
+        <form #servicePost='ngForm' (ngSubmit)="onGuestSubmit(servicePost.value)" class="row">
+          <div class="col col-md-12">
+            <!-- Inputs -->
+            <label for="inputServiceTime" class="form-label">Service Times</label>
+            <select class="form-select" id="inputServiceTime" aria-label="select example" name="serviceId" ngModel>
+              <option *ngFor="let service of churchServices" [ngValue]=service?.id>{{timeDisplay(service?.startTime)}} ({{service?.description}})</option>
             </select>
           </div>
           <div class="col-md-12"><legend><br>Personal Information</legend></div>
           <div class="col-md-6">
             <label for="inputFirstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="inputFirstName" required="">
+            <input type="text" class="form-control" id="inputFirstName" required="" name="firstName" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputLastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="inputLastName" required="">
+            <input type="text" class="form-control" id="inputLastName" required="" name="lastName" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputPhoneNumber" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="inputPhoneNumber" maxlength="10" required="">
+            <input type="tel" class="form-control" id="inputPhoneNumber" maxlength="10" required="" name="phoneNumber" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputPersonCount" class="form-label">Person Count</label>
-            <input type="number" class="form-control" id="inputPersonCount" required="">
+            <input type="number" class="form-control" id="inputPersonCount" required="" name="personCount" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputStreet" class="form-label">Street</label>
-            <input type="text" class="form-control" id="inputStreet" required="">
+            <input type="text" class="form-control" id="inputStreet" required="" name="street" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputCity" class="form-label">City</label>
-            <input type="text" class="form-control" id="inputCity" required="">
+            <input type="text" class="form-control" id="inputCity" required="" name="city" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputState" class="form-label">State</label>
-            <input type="text" class="form-control" id="inputState" maxlength="2" required="">
+            <input type="text" class="form-control" id="inputState" maxlength="2" required="" name="state" ngModel>
           </div>
           <div class="mb-3 col-md-6">
             <label for="inputZip" class="form-label">Zip Code</label>
-            <input type="text" class="form-control" id="inputZip" maxlength="5" required="">
+            <input type="text" class="form-control" id="inputZip" maxlength="5" required="" name="zipCode" ngModel>
           </div>
           <div class="mb-3 col-md-12">
             <label for="inputDescription" class="form-label">Description</label>
-            <input type="text" class="form-control" id="inputDescription">
+            <input type="text" class="form-control" id="inputDescription" name="description" ngModel>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" type="submit">Request Driver</button>
+            <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Request Driver</button>
           </div>
         </form>
       </div>
