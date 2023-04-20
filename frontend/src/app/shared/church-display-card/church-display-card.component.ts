@@ -18,7 +18,7 @@ export class ChurchDisplayCardComponent implements OnInit {
   public jstoday = '';
 
   //----------RECONFIGURE WHEN AUTH IMPLEMENTED----------
-  public isSignedIn = true;
+  public isSignedIn = false;
 
   constructor(private http: HttpClient) { 
     this.jstoday = formatDate(this.today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
@@ -94,26 +94,26 @@ export class ChurchDisplayCardComponent implements OnInit {
     let url = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests";
     let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
-        "username" : "tim",
-        // "personCount": data.personCount,
-        // "street": data.street,
-        // "city": data.city,
-        // "state": data.state,        
-        // "zipCode": data.zipCode,
-        // "description": data.description,
+        "username" : "tim testing",
+        "personCount": data.personCount,
+        "street": data.street,
+        "city": data.city,
+        "state": data.state,        
+        "zipCode": data.zipCode,
+        "description": data.description,
         "serviceId": data.serviceId,
         "requestTime": this.jstoday,
     }
 
     console.warn(formattedData);
-    // this.http.post(url, formattedData, {'headers':headers}).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    // )  
+    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )  
   }
 
   onGuestSubmit(data: any){
-    let url = "NEEDURL!";
+    let url = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/guest-ride-request";
     let headers = {"Content-Type": "application/json"}
     let formattedData = {
         "firstName": data.firstName,
@@ -130,10 +130,10 @@ export class ChurchDisplayCardComponent implements OnInit {
     }
 
     console.warn(formattedData);
-    // this.http.post(url, formattedData, {'headers':headers}).subscribe(
-    //   (response) => console.log(response),
-    //   (error) => console.log(error)
-    // )  
+    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    )  
   }
 
 }
