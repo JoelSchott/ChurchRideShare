@@ -16,6 +16,8 @@ import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.
 import { ChurchSearchFilterPipe } from './shared/church-search-filter.pipe';
 import { ChurchDisplayCardComponent } from './shared/church-display-card/church-display-card.component';
 import { AccountPageComponent } from './features/account-page/account-page.component';
+import { LocalStorageService } from './services/local-storage.service';
+import { JwtTokenService } from './services/jwt-token.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AccountPageComponent } from './features/account-page/account-page.compo
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [LocalStorageService, JwtTokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
