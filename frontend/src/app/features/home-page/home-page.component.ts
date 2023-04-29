@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { JwtTokenService } from 'src/app/services/jwt-token.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,24 +11,25 @@ import { JwtTokenService } from 'src/app/services/jwt-token.service';
 export class HomePageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
-              private authStorageService: LocalStorageService,
-              private jwtService: JwtTokenService,) { }
+              private jwtService: JwtTokenService,
+              private cookieService: CookieService,) { }
 
   ngOnInit(): void {
-    this.checkForToken();
+    this.checkForUrlToken();
   }
   
-  // For Rider log in
-  checkForToken(){
+  checkForUrlToken(){
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
-        this.authStorageService.set("riderToken", fragment);
-        this.jwtService.setToken(fragment);
-        console.log(this.jwtService.getDecodeToken());
-        console.log(this.jwtService.getUsername());
-        console.log(this.jwtService.isTokenExpired());
+        // Saving token in cookies allows to retrieve token even after page refresh
+        this.cookieService.set("riderToken", fragment);
       }
     })
+
+    // Works after page refresh (if given token in url)
+    this.jwtService.setToken(this.cookieService.get("riderToken"));
+    // Prints token
+    if(this.cookieService.get("riderToken")) console.log(this.jwtService.getDecodeToken());
   }
 
 }
