@@ -10,9 +10,25 @@ export class GlobalConstants {
   public static GETChurchObjects: string = 'https://xyae35uw4b.execute-api.us-east-2.amazonaws.com/test1/church';
   public static GETChurchObject: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/churches?id='; //+ church_id
   public static GETChurchServices: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/services?church_id='; //+ church_id
+  public static GETGuestRideRequests: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/guest-ride-request';
+  public static GETAdmins: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins";
+  public static GETAdminsByChurchId: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins?church_id="; //+ church_id
+  public static GETAdminsByUsername: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins?username="; // + username
+  public static GETDrivers: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/drivers";
+  public static GETDriversByChurchId: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/drivers?church_id="; //+ church_id
+  public static GETDriversByUsername: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/drivers?username="; // + username
 
   public static POSTUserRideRequests: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests';
   public static POSTGuestRideRequest: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/guest-ride-request";
+  public static POSTService: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/services"
+  public static POSTAdmins: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins"
+  public static POSTDrivers: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/drivers"
+
+  public static DELETEService: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/services?service_id="; // + service id
+  public static DELETEAdmin: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins?username=" // + username
+  public static DELETEDriver: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/drivers" // params={'username': username, 'churchId': church_id}
+
+  public static PATCHChurchObject: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/churches?id="; //+ church_id
 }
 
 export function getFormattedDay(minutes: any) {

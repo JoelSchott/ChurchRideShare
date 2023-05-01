@@ -2,79 +2,84 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column mt-3">
+        <ul class="nav nav-pills flex-column mt-3" id="account-tabs">
           <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#account-details">Account Overview</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#overview" [class.active]="isActiveTab('overview')" (click)="setActiveTab('overview')">Account Overview</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#username">Change Login</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#user" [class.active]="isActiveTab('user')" (click)="setActiveTab('user')">Change Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#church-address">Church Address</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#church-address" [class.active]="isActiveTab('church-address')" (click)="setActiveTab('church-address')">Church Info</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#service-dates">Service Dates and Times</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#service-dates" [class.active]="isActiveTab('service-dates')" (click)="setActiveTab('service-dates')">Service Dates and Times</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#manage-admins">Manage Admins</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-admins" [class.active]="isActiveTab('manage-admins')" (click)="setActiveTab('manage-admins')">Manage Admins</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-givers">Manage Ride Givers</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-drivers" [class.active]="isActiveTab('manage-drivers')" (click)="setActiveTab('manage-drivers')">Manage Drivers</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-requests">Ride Requests</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-requests" [class.active]="isActiveTab('manage-ride-requests')" (click)="setActiveTab('manage-ride-requests')">Ride Requests</a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
         <div class="tab-content mt-3">
-          <div class="tab-pane fade show active" id="account-details">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('overview')}" id="overview">
             <h1>Account Overview</h1>
             <hr>
-            <h3>{{ churchInfo[0].name }}</h3>
+            <h3>{{ churchInfo?.name }}</h3>
             <p>
-              {{ churchInfo[0].description }} <br>
-              {{ churchInfo[0].street }} <br>
-              {{ churchInfo[0].city }},
-              {{ churchInfo[0].state }}
-              {{ churchInfo[0].zipCode }}
+              {{ churchInfo?.description }} <br>
+              {{ churchInfo?.street }} <br>
+              {{ churchInfo?.city }}
+              {{ churchInfo?.state }}
+              {{ churchInfo?.zipCode }} <br>
+              <a href="{{ churchInfo?.website }}" target="_blank">{{ churchInfo?.website }}</a>
             </p>
           </div>
-          <div class="tab-pane fade" id="username">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('user')}" id="user">
             <h1>Change Login</h1>
             <a href="#">Change Login Info</a>
           </div>
-          <div class="tab-pane fade" id="church-address">
-            <h1>Church Address</h1>
-            <form>
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('church-address')}" id="church-address">
+            <h1>Church Info</h1>
+            <form #churchInfoPost='ngForm' (ngSubmit)="onChurchInfoSubmit(churchInfoPost.value)">
               <div class="mb-3">
                 <label for="church-name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="church-name" value="{{ churchInfo[0].name }}">
+                <input type="text" class="form-control" id="church-name" [(ngModel)]="churchInfo.name" required name="name">
               </div>
               <div class="mb-3">
                 <label for="church-description" class="form-label">Description</label>
-                <input type="text" class="form-control" id="church-description" value="{{ churchInfo[0].description }}">
+                <input type="text" class="form-control" id="church-description" [(ngModel)]="churchInfo.description" name="description">
               </div>
               <div class="mb-3">
                 <label for="church-street" class="form-label">Street Address</label>
-                <input type="text" class="form-control" id="church-street" value="{{ churchInfo[0].street }}">
+                <input type="text" class="form-control" id="church-street" [(ngModel)]="churchInfo.street" required name="street">
               </div>
               <div class="mb-3">
                 <label for="church-city" class="form-label">City</label>
-                <input type="text" class="form-control" id="church-city" value="{{ churchInfo[0].city }}">
+                <input type="text" class="form-control" id="church-city" [(ngModel)]="churchInfo.city" required name="city">
               </div>
               <div class="mb-3">
                 <label for="church-state" class="form-label">State</label>
-                <input type="text" class="form-control" id="church-state" value="{{ churchInfo[0].state }}">
+                <input type="text" class="form-control" id="church-state" [(ngModel)]="churchInfo.state" required name="state">
               </div>
               <div class="mb-3">
                 <label for="church-zip" class="form-label">Zip Code</label>
-                <input type="text" class="form-control" id="church-zip" value="{{ churchInfo[0].zipCode }}">
+                <input type="text" class="form-control" id="church-zip" [(ngModel)]="churchInfo.zipCode" required name="zipCode">
+              </div>
+              <div class="mb-3">
+                <label for="church-website" class="form-label">Website</label>
+                <input type="text" class="form-control" id="church-website" [(ngModel)]="churchInfo.website" name="website">
               </div>
               <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
           </div>
-          <div class="tab-pane fade" id="service-dates">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('service-dates')}" id="service-dates">
             <h1>Service Dates and Times</h1>
             <!-- Table for listing services -->
             <table class="table">
@@ -90,22 +95,22 @@
                   <td>{{ service.description }}</td>
                   <td>{{ service.startTime }}</td>
                   <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDeleteService(service.id)">Remove</button>
                   </td>
                 </tr>
               </tbody>
             </table>
             <!-- Form for adding new service -->
-            <form>
+            <form #servicePost='ngForm' (ngSubmit)="onAddServiceSubmit(servicePost.value)">
               <h3>Add New Service or Event</h3>
               <div class="mb-3">
                 <label for="service-name" class="form-label">Service Name</label>
-                <input type="text" class="form-control" id="service-name">
+                <input type="text" class="form-control" id="service-name" required name="name" ngModel>
               </div>
               <div class="mb-3">
                 <label for="service-day" class="form-label">Service Day</label>
-                <select class="form-control" id="service-day">
-                  <option value="sunday">Sunday</option>
+                <select class="form-control" id="service-day" required name="day" ngModel>
+                  <option value="sunday" selected>Sunday</option>
                   <option value="monday">Monday</option>
                   <option value="tuesday">Tuesday</option>
                   <option value="wednesday">Wednesday</option>
@@ -116,13 +121,13 @@
               </div>            
               <div class="mb-3">
                 <label for="service-time" class="form-label">Service Time</label>
-                <input type="time" class="form-control" id="service-time">
+                <input type="time" class="form-control" id="service-time" required name="time" ngModel>
               </div>
               <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
             
           </div>
-          <div class="tab-pane fade" id="manage-admins">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-admins')}" id="manage-admins">
             <h1>Manage Admins</h1>
             <p>Here you can view and manage the other admins for your church's account.</p>
             <!-- Table for listing admins -->
@@ -130,85 +135,71 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th scope="col">Email</th>
+                  <!-- <th scope="col">Email</th> -->
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>John Doe</td>
-                  <td>johndoe@example.com</td>
+                <tr *ngFor="let admin of churchAdmins">
+                  <td>{{ admin.username }}</td>
+                  <!-- <td>{{ admin.email }}</td> -->
                   <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jane Smith</td>
-                  <td>janesmith@example.com</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDeleteAdmin(admin.username)">Remove</button>
                   </td>
                 </tr>
               </tbody>
             </table>
             <!-- Form for adding new admin -->
-            <form>
+            <form #adminPost='ngForm' (ngSubmit)="onAddAdminSubmit(adminPost.value)">
               <h3>Add New Admin</h3>
               <div class="mb-3">
                 <label for="admin-name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="admin-name">
+                <input type="text" class="form-control" id="admin-name" required name="name" ngModel>
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="admin-email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="admin-email">
-              </div>
+                <input type="email" class="form-control" id="admin-email" required name="email" ngModel>
+              </div> -->
               <button type="submit" class="btn btn-primary">Add Admin</button>
             </form>
           </div>
-          <div class="tab-pane fade" id="manage-ride-givers">
-            <h1>Manage Ride Givers</h1>
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-drivers')}" id="manage-drivers">
+            <h1>Manage Drivers</h1>
             <p>Here you can view and manage the ride givers for your church's events.</p>
             <!-- Table for listing ride givers -->
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th scope="col">Phone Number</th>
+                  <!-- <th scope="col">Phone Number</th> -->
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>John Doe</td>
-                  <td>123-456-7890</td>
+                <tr *ngFor="let driver of churchDrivers">
+                  <td>{{ driver.username }}</td>
+                  <!-- <td>{{ driver.phone }}</td> -->
                   <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Jane Smith</td>
-                  <td>987-654-3210</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDeleteDriver(driver.username)">Remove</button>
                   </td>
                 </tr>
               </tbody>
             </table>
             <!-- Form for adding new ride giver -->
-            <form>
+            <form #driverPost='ngForm' (ngSubmit)="onAddDriverSubmit(driverPost.value)">
               <h3>Add New Ride Giver</h3>
               <div class="mb-3">
                 <label for="ride-giver-name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="ride-giver-name">
+                <input type="text" class="form-control" id="ride-giver-name" required name="name" ngModel>
               </div>
-              <div class="mb-3">
+              <!-- <div class="mb-3">
                 <label for="ride-giver-phone" class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="ride-giver-phone">
-              </div>
+                <input type="tel" class="form-control" id="ride-giver-phone" required name="phone" ngModel>
+              </div> -->
               <button type="submit" class="btn btn-primary">Add Ride Giver</button>
             </form>
           </div>
-          <div class="tab-pane fade" id="manage-ride-requests">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-ride-requests')}" id="manage-ride-requests">
             <h1>Ride Requests</h1>
             <!-- Table for listing ride requests -->
             <table class="table">
@@ -224,25 +215,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Sunday 9:30am</td>
-                  <td>John Doe</td>
-                  <td>1</td>
-                  <td>123-456-7890</td>
-                  <td>12345 Pine Street, Rolla, MO 12345</td>
-                  <td>You can park at the side door.</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Unavailable</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Wednesday 7:00pm</td>
-                  <td>Jane Smith</td>
-                  <td>2</td>
-                  <td>987-654-3210</td>
-                  <td>54321 Pine Street, Rolla, MO 12345</td>
-                  <td>Can you be early?</td>
+                <tr *ngFor="let r of rideRequests">
+                  <td>{{ r.serviceId }}</td>
+                  <td>{{ r.firstName }} {{ r.lastName }}</td>
+                  <td>{{ r.personCount }}</td>
+                  <td>{{ r.phoneNumber }}</td>
+                  <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
+                  <td>{{ r.description }}</td>
                   <td>
                     <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
                     <button type="button" class="btn btn-sm btn-outline-danger">Unavailable</button>
