@@ -54,6 +54,12 @@ create table Riders (
 create table UserRideRequests (
     id char(36) primary key,
     username varchar(80) references Riders(username),
+    personCount integer not null,
+    state char(2) not null,
+    city varchar(80) not null,
+    street varchar(80) not null,
+    zipCode char(5) not null,
+    description varchar(1024),
     serviceId char(36) not null references Services(id),
     acceptedBy varchar(80) references Users(username),
     requestTime datetime not null,

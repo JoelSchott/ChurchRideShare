@@ -92,11 +92,13 @@ insert into Riders values (
 );
 
 insert into UserRideRequests values (
-    "cbfb7439-9ced-477b-a5d2-084f1e755e14", "tim", "1dd17191-9f19-435e-8772-9850ae77e299", null, 
+    "cbfb7439-9ced-477b-a5d2-084f1e755e14", "tim", 1, "MO", "Rolla", "123 The Way", "65401",
+    "Take me to church please", "1dd17191-9f19-435e-8772-9850ae77e299", null, 
     '2023-02-14 08:30:12', null
 );
 insert into UserRideRequests values (
-    "9bd85139-e3f3-4fb9-9e1f-3062401bfb6d", "matt2", "66c61054-a15b-4a33-a334-dd0f5d6e3480", 
+    "9bd85139-e3f3-4fb9-9e1f-3062401bfb6d", "matt2", 2, "MO", "Rolla", "27 Your Rest", "65401",
+    "I would like to come too", "66c61054-a15b-4a33-a334-dd0f5d6e3480", 
     "luke", '2023-01-09 22:12:00', '2023-01-10 04:10:10'
 );
 
