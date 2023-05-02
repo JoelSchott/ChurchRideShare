@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { GlobalConstants, getFormattedDay } from 'src/app/global';
+import { GlobalConstants, getFormattedDay, getFormattedMinutes } from 'src/app/global';
 
 @Component({
   selector: 'app-account-page',
@@ -8,7 +8,7 @@ import { GlobalConstants, getFormattedDay } from 'src/app/global';
   styleUrls: ['./account-page.component.scss']
 })
 export class AccountPageComponent implements OnInit {
-  public churchId: string = 'ba227e8b-a40b-43fa-9ebe-c059ac10c27b'
+  public churchId: string = '5b8c73d3-9e6a-4b8c-b44c-6637132ec60e'
 
   public churchInfo: any = null;
   public churchServices: any = null;
@@ -28,12 +28,8 @@ export class AccountPageComponent implements OnInit {
 
       for (let service of this.churchServices) {
         const minutes = service.startTime;
-        service.startTime = getDayFormat(minutes);
+        service.startTime = getFormattedDay(minutes);
       }
-    });
-
-    this.http.get(GlobalConstants.GETGuestRideRequests).subscribe((response) => {
-      this.rideRequests = response;
     });
 
     this.http.get(GlobalConstants.GETAdminsByChurchId + this.churchId).subscribe((response) => {
@@ -42,6 +38,10 @@ export class AccountPageComponent implements OnInit {
 
     this.http.get(GlobalConstants.GETDriversByChurchId + this.churchId).subscribe((response) => {
       this.churchDrivers = response;
+    });
+
+    this.http.get(GlobalConstants.GETGuestRideRequests).subscribe((response) => {
+      this.rideRequests = response
     });
   }
 
@@ -72,7 +72,7 @@ export class AccountPageComponent implements OnInit {
     let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
-      "start_time": getMinutesFormat(data.day, data.time),
+      "start_time": getFormattedMinutes(data.day, data.time),
       "description": data.name,
     }
     
@@ -163,30 +163,4 @@ export class AccountPageComponent implements OnInit {
     var activeTab = localStorage.getItem("activeTab") || "overview";
     return (activeTab === tabName);
   };
-}
-
-function getDayFormat(minutes: any) {
-  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const minutesInDay = 1440; // 24 * 60 (24 hours in a day, 60 minutes in an hour)
-  
-  const dayOfWeek = weekdays[Math.floor(minutes / minutesInDay)];
-  const minutesInCurrentDay = minutes % minutesInDay;
-  
-  const hour = Math.floor(minutesInCurrentDay / 60);
-  const minute = minutesInCurrentDay % 60;
-  const amPm = hour < 12 ? "am" : "pm";
-  const formattedHour = hour % 12 === 0 ? 12 : hour % 12; // convert hour to 12-hour format
-  
-  return `${dayOfWeek}, ${formattedHour}:${minute.toString().padStart(2, "0")}${amPm}`;
-}
-
-function getMinutesFormat(day: any, time: any) {
-  const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const dayIndex = daysOfWeek.indexOf(day.toLowerCase());
-
-  const hours = parseInt(time.split(':')[0]);
-  const minutes = parseInt(time.split(':')[1]);
-  const totalMinutes = (dayIndex * 24 * 60) + (hours * 60) + minutes;
-
-  return totalMinutes;
 }

@@ -45,3 +45,14 @@ export function getFormattedDay(minutes: any) {
   
   return `${dayOfWeek}, ${formattedHour}:${minute.toString().padStart(2, "0")}${amPm}`;
 }
+
+export function getFormattedMinutes(day: any, time: any) {
+  const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const dayIndex = daysOfWeek.indexOf(day.toLowerCase());
+
+  const hours = parseInt(time.split(':')[0]);
+  const minutes = parseInt(time.split(':')[1]);
+  const totalMinutes = (dayIndex * 24 * 60) + (hours * 60) + minutes;
+
+  return totalMinutes;
+}
