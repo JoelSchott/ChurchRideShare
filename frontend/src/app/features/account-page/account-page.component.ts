@@ -101,7 +101,7 @@ export class AccountPageComponent implements OnInit {
     let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
-      "username": data.name,
+      "username": data.username,
     }
     
     console.warn(formattedData)
@@ -110,7 +110,14 @@ export class AccountPageComponent implements OnInit {
         console.log(response); 
         location.reload();  
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        if (error.status === 500 && error.error.error.includes("1452")) { // 1452 is the error code for the fk constraint failing in MySQL
+          showErrorBanner("manage-admins", "Error: User does not have an account. \nUser must have an account before you can add them as an admin.");
+        } else {
+          showErrorBanner("manage-admins", "Error: Unable to add user.");
+        }
+      }
     )
   }
 
@@ -130,7 +137,7 @@ export class AccountPageComponent implements OnInit {
     let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
-      "username": data.name,
+      "username": data.username,
     }
     
     console.warn(formattedData)
@@ -139,7 +146,14 @@ export class AccountPageComponent implements OnInit {
         console.log(response); 
         location.reload();  
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        if (error.status === 500 && error.error.error.includes("1452")) { // 1452 is the error code for the fk constraint failing in MySQL
+          showErrorBanner("manage-drivers", "Error: User does not have an account. \nUser must have an account before you can add them as a driver.");
+        } else {
+          showErrorBanner("manage-drivers", "Error: Unable to add user.");
+        }
+      }
     )
   }
 
@@ -157,10 +171,38 @@ export class AccountPageComponent implements OnInit {
 
   setActiveTab(activeTab: any) {
     localStorage.setItem("activeTab", activeTab);
+    removeAnyErrorBanners();
   };
   
   isActiveTab(tabName: any) {
     var activeTab = localStorage.getItem("activeTab") || "overview";
     return (activeTab === tabName);
   };
+}
+
+function showErrorBanner(elementId: any, msg: any) {
+  // Check if an alert banner with the same content already exists
+  const existingBanners = document.querySelectorAll('.alert.alert-danger');
+  for (let i = 0; i < existingBanners.length; i++) {
+    if (existingBanners[i].innerHTML === msg) {
+      // Alert banner already exists, do nothing
+      return;
+    }
+  }
+
+  // Create bootstrap alert banner
+  const alertBanner = document.createElement('div');
+  alertBanner.className = 'alert alert-danger';
+  alertBanner.innerHTML = msg;
+
+  // Add it to the top of the page
+  const accountPage: any = document.querySelector(".account-page .container #" + elementId);
+  accountPage.prepend(alertBanner);
+}
+
+function removeAnyErrorBanners() {
+  const existingBanners = document.querySelectorAll('.alert.alert-danger');
+  for (let i = 0; i < existingBanners.length; i++) {
+    existingBanners[i].remove();
+  }
 }
