@@ -134,7 +134,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
+                  <th scope="col">Username</th>
                   <!-- <th scope="col">Email</th> -->
                   <th scope="col">Actions</th>
                 </tr>
@@ -153,8 +153,8 @@
             <form #adminPost='ngForm' (ngSubmit)="onAddAdminSubmit(adminPost.value)">
               <h3>Add New Admin</h3>
               <div class="mb-3">
-                <label for="admin-name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="admin-name" required name="name" ngModel>
+                <label for="admin-username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="admin-username" required name="username" ngModel>
               </div>
               <!-- <div class="mb-3">
                 <label for="admin-email" class="form-label">Email</label>
@@ -166,11 +166,11 @@
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-drivers')}" id="manage-drivers">
             <h1>Manage Drivers</h1>
             <p>Here you can view and manage the ride givers for your church's events.</p>
-            <!-- Table for listing ride givers -->
+            <!-- Table for listing drivers -->
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
+                  <th scope="col">Username</th>
                   <!-- <th scope="col">Phone Number</th> -->
                   <th scope="col">Actions</th>
                 </tr>
@@ -185,18 +185,18 @@
                 </tr>
               </tbody>
             </table>
-            <!-- Form for adding new ride giver -->
+            <!-- Form for adding new driver -->
             <form #driverPost='ngForm' (ngSubmit)="onAddDriverSubmit(driverPost.value)">
-              <h3>Add New Ride Giver</h3>
+              <h3>Add New Driver</h3>
               <div class="mb-3">
-                <label for="ride-giver-name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="ride-giver-name" required name="name" ngModel>
+                <label for="ride-giver-username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="ride-giver-username" required name="username" ngModel>
               </div>
               <!-- <div class="mb-3">
                 <label for="ride-giver-phone" class="form-label">Phone Number</label>
                 <input type="tel" class="form-control" id="ride-giver-phone" required name="phone" ngModel>
               </div> -->
-              <button type="submit" class="btn btn-primary">Add Ride Giver</button>
+              <button type="submit" class="btn btn-primary">Add Driver</button>
             </form>
           </div>
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-ride-requests')}" id="manage-ride-requests">
