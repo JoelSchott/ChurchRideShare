@@ -46,3 +46,9 @@ app-root {
         flex: 1;
     }
 }
+
+.alert.alert-danger {
+    --bs-alert-color: white;
+    --bs-alert-bg: #b73a3a;
+    --bs-alert-border-color: #b72e2e;
+}

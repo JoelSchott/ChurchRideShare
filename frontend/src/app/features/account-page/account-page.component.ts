@@ -170,8 +170,10 @@ export class AccountPageComponent implements OnInit {
   }
 
   setActiveTab(activeTab: any) {
+    if (localStorage.getItem("activeTab") != activeTab) {
+      removeAnyErrorBanners();
+    }
     localStorage.setItem("activeTab", activeTab);
-    removeAnyErrorBanners();
   };
   
   isActiveTab(tabName: any) {
