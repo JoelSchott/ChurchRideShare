@@ -166,7 +166,7 @@
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-drivers')}" id="manage-drivers">
             <h1>Manage Drivers</h1>
             <p>Here you can view and manage the ride givers for your church's events.</p>
-            <!-- Table for listing ride givers -->
+            <!-- Table for listing drivers -->
             <table class="table">
               <thead>
                 <tr>
@@ -185,7 +185,7 @@
                 </tr>
               </tbody>
             </table>
-            <!-- Form for adding new ride giver -->
+            <!-- Form for adding new driver -->
             <form #driverPost='ngForm' (ngSubmit)="onAddDriverSubmit(driverPost.value)">
               <h3>Add New Driver</h3>
               <div class="mb-3">
@@ -196,7 +196,7 @@
                 <label for="ride-giver-phone" class="form-label">Phone Number</label>
                 <input type="tel" class="form-control" id="ride-giver-phone" required name="phone" ngModel>
               </div> -->
-              <button type="submit" class="btn btn-primary">Add Ride Giver</button>
+              <button type="submit" class="btn btn-primary">Add Driver</button>
             </form>
           </div>
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-ride-requests')}" id="manage-ride-requests">
