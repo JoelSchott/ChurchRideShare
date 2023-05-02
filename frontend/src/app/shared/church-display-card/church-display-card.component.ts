@@ -3,6 +3,7 @@ import { Church } from '../church';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { GlobalConstants, getFormattedDay } from 'src/app/global';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'church-display-card',
@@ -21,12 +22,19 @@ export class ChurchDisplayCardComponent implements OnInit {
   //----------RECONFIGURE WHEN AUTH IMPLEMENTED----------
   public isSignedIn = false;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, 
+              private cookieService: CookieService,) { 
     this.jstoday = formatDate(this.today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
   }
 
 
   ngOnInit(): void { 
+    // Check if signed in
+    if(this.cookieService.get("userToken")){
+      console.log("signed in");
+      this.isSignedIn = true;
+    }
+
     // If no image in database, assign default image
     if(this.church?.imageExtension != "png"){
       this.imageUrl == this.church?.imageExtension;
@@ -44,27 +52,34 @@ export class ChurchDisplayCardComponent implements OnInit {
     return getFormattedDay(minutes);
   }
 
-  onUserSubmit(data: any){
-    let url: string= GlobalConstants.POSTUserRideRequests;
-    let headers = { 'Content-Type': 'application/json' }
-    let formattedData = {
-        "username" : "tim testing",
-        "personCount": data.personCount,
-        "street": data.street,
-        "city": data.city,
-        "state": data.state,        
-        "zipCode": data.zipCode,
-        "description": data.description,
-        "serviceId": data.serviceId,
-        "requestTime": this.jstoday,
-    }
+  // autoFillForm(){
 
-    console.warn(formattedData);
-    this.http.post(url, formattedData, {'headers':headers}).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-    )  
-  }
+  // }
+
+  // onUserSubmit(data: any){
+  //   let url: string= GlobalConstants.POSTUserRideRequests;
+  //   let headers = { 'Content-Type': 'application/json', 
+  //                   'Authorization': this.cookieService.get("userToken")}
+  //   let formattedData = {
+  //       "firstName": data.firstName,
+  //       "lastName": data.lastName,
+  //       "phoneNumber": data.phoneNumber,
+  //       "personCount": data.personCount,
+  //       "street": data.street,
+  //       "city": data.city,
+  //       "state": data.state,        
+  //       "zipCode": data.zipCode,
+  //       "description": data.description,
+  //       "serviceId": data.serviceId,
+  //       "requestTime": this.jstoday,
+  //   }
+
+  //   console.warn(formattedData);
+  //   this.http.post(url, formattedData, {'headers':headers}).subscribe(
+  //     (response) => console.log(response),
+  //     (error) => console.log(error)
+  //   )  
+  // }
 
   onGuestSubmit(data: any){
     let url = GlobalConstants.POSTGuestRideRequest;

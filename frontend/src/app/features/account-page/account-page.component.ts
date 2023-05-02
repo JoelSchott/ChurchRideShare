@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { GlobalConstants, getFormattedDay, getFormattedMinutes } from 'src/app/global';
 
@@ -16,9 +19,13 @@ export class AccountPageComponent implements OnInit {
   public churchAdmins: any = null;
   public churchDrivers: any = null;
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private route: ActivatedRoute, 
+              private jwtService: JwtTokenService,
+              private cookieService: CookieService,) {}
 
   ngOnInit() {    
+    this.checkForUrlToken();
     this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe((response) => {
       this.churchInfo = response;
     });
@@ -43,6 +50,20 @@ export class AccountPageComponent implements OnInit {
     this.http.get(GlobalConstants.GETGuestRideRequests).subscribe((response) => {
       this.rideRequests = response
     });
+  }
+
+  checkForUrlToken(){
+    this.route.fragment.subscribe((fragment) => {
+      if(fragment){
+        // Saving token in cookies allows to retrieve token even after page refresh
+        this.cookieService.set("adminToken", fragment);
+      }
+    })
+
+    // Works after page refresh (if given token in url)
+    this.jwtService.setToken(this.cookieService.get("adminToken"));
+    // Prints token
+    if(this.cookieService.get("adminToken")) console.log(this.jwtService.getDecodeToken());
   }
 
   onChurchInfoSubmit(data: any) {

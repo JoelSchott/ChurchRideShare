@@ -22,14 +22,14 @@ export class HomePageComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
-        this.cookieService.set("riderToken", fragment);
+        this.cookieService.set("userToken", fragment);
       }
     })
 
     // Works after page refresh (if given token in url)
-    this.jwtService.setToken(this.cookieService.get("riderToken"));
+    this.jwtService.setToken(this.cookieService.get("userToken"));
     // Prints token
-    if(this.cookieService.get("riderToken")) console.log(this.jwtService.getDecodeToken());
+    if(this.cookieService.get("userToken")) console.log(this.jwtService.getDecodeToken());
   }
 
 }
