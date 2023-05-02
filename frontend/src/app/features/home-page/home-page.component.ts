@@ -30,6 +30,7 @@ export class HomePageComponent implements OnInit {
     this.jwtService.setToken(this.cookieService.get("userToken"));
     // Prints token
     if(this.cookieService.get("userToken")) console.log(this.jwtService.getDecodeToken());
+
   }
 
 }

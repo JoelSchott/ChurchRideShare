@@ -60,3 +60,9 @@ export function getFormattedMinutes(day: any, time: any) {
 
   return totalMinutes;
 }
+
+export function getTokenId(token: string){
+  token = token.slice(9, token.indexOf("&access_token"));
+
+  return token;
+}

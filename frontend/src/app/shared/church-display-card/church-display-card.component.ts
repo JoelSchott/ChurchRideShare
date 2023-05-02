@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Church } from '../church';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import { GlobalConstants, getFormattedDay } from 'src/app/global';
+import { GlobalConstants, getFormattedDay, getTokenId } from 'src/app/global';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
 
 @Component({
   selector: 'church-display-card',
@@ -23,7 +24,8 @@ export class ChurchDisplayCardComponent implements OnInit {
   public isSignedIn = false;
 
   constructor(private http: HttpClient, 
-              private cookieService: CookieService,) { 
+              private cookieService: CookieService,
+              private jwtService: JwtTokenService,) { 
     this.jstoday = formatDate(this.today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
   }
 
@@ -56,30 +58,39 @@ export class ChurchDisplayCardComponent implements OnInit {
 
   // }
 
-  // onUserSubmit(data: any){
-  //   let url: string= GlobalConstants.POSTUserRideRequests;
-  //   let headers = { 'Content-Type': 'application/json', 
-  //                   'Authorization': this.cookieService.get("userToken")}
-  //   let formattedData = {
-  //       "firstName": data.firstName,
-  //       "lastName": data.lastName,
-  //       "phoneNumber": data.phoneNumber,
-  //       "personCount": data.personCount,
-  //       "street": data.street,
-  //       "city": data.city,
-  //       "state": data.state,        
-  //       "zipCode": data.zipCode,
-  //       "description": data.description,
-  //       "serviceId": data.serviceId,
-  //       "requestTime": this.jstoday,
-  //   }
+  onSubmit(data: any){
+    if(this.isSignedIn) this.onUserSubmit(data);
+    else this.onGuestSubmit(data);
+  }
 
-  //   console.warn(formattedData);
-  //   this.http.post(url, formattedData, {'headers':headers}).subscribe(
-  //     (response) => console.log(response),
-  //     (error) => console.log(error)
-  //   )  
-  // }
+  onUserSubmit(data: any){
+    this.jwtService.setToken(this.cookieService.get("userToken"));
+    let url: string= GlobalConstants.POSTUserRideRequests;
+    console.log(this.cookieService.get("userToken"));
+    var headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': getTokenId(this.cookieService.get("userToken"))
+    });
+    let formattedData = {
+        "firstName": data.firstName,
+        "lastName": data.lastName,
+        "phoneNumber": data.phoneNumber,
+        "personCount": data.personCount,
+        "street": data.street,
+        "city": data.city,
+        "state": data.state,        
+        "zipCode": data.zipCode,
+        "description": data.description,
+        "serviceId": data.serviceId,
+        "requestTime": this.jstoday,
+    }
+
+    console.warn(formattedData);
+    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    ) 
+  }
 
   onGuestSubmit(data: any){
     let url = GlobalConstants.POSTGuestRideRequest;
@@ -103,6 +114,7 @@ export class ChurchDisplayCardComponent implements OnInit {
       (response) => console.log(response),
       (error) => console.log(error)
     )  
+  console.log("guest");
   }
-
+    
 }
