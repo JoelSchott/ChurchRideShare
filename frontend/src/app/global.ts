@@ -13,6 +13,7 @@ export class GlobalConstants {
   // Below GET requests should require tokens
   public static GETGuestRideRequests: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/guest-ride-request';
   public static GETUserRideRequests: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests';
+  public static GETUserRiderInfo: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/riders';
   public static GETAdmins: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins";
   public static GETAdminsByChurchId: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins?church_id="; //+ church_id
   public static GETAdminsByUsername: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/admins?username="; // + username

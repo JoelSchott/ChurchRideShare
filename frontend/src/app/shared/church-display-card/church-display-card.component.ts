@@ -17,6 +17,7 @@ export class ChurchDisplayCardComponent implements OnInit {
   public webData: any;
   public imageUrl: string = "/assets/default_church_icon.png"; //Need license for commercial use
   public churchServices: any;
+  public userData: any;
   public today= new Date();
   public jstoday = '';
 
@@ -34,8 +35,25 @@ export class ChurchDisplayCardComponent implements OnInit {
     if(this.cookieService.get("userToken")){
       console.log("signed in");
       this.isSignedIn = true;
-    }
 
+      // Autofill-----------------------Lots of errors before working
+      this.jwtService.setToken(this.cookieService.get("userToken"));
+      let url: string = GlobalConstants.GETUserRiderInfo;
+      var headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': getTokenId(this.cookieService.get("userToken"))
+      });
+      this.http.get(url, {'headers':headers}).subscribe(
+        (response) => {
+          this.userData = response;
+          this.userData = this.userData[0];
+          console.log("UserData");
+          // console.log(this.userData[0].personCount);
+        },
+        (error) => console.log(error)
+      );
+    }
+    
     // If no image in database, assign default image
     if(this.church?.imageExtension != "png"){
       this.imageUrl == this.church?.imageExtension;
@@ -48,22 +66,9 @@ export class ChurchDisplayCardComponent implements OnInit {
     });
   }
 
-  ngOnChange(): void{
-
-  }
-
   // Convert backend service data to readible time
   public timeDisplay(minutes: number){
     return getFormattedDay(minutes);
-  }
-
-  // autoFillForm(){
-
-  // }
-
-  onSubmit(data: any){
-    if(this.isSignedIn) this.onUserSubmit(data);
-    else this.onGuestSubmit(data);
   }
 
   onUserSubmit(data: any){
