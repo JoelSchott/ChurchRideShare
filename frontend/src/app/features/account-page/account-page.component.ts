@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { GlobalConstants, getFormattedDay, getFormattedMinutes } from 'src/app/global';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { GlobalConstants, getFormattedDay, getFormattedMinutes, getTokenId } from 'src/app/global';
 
 @Component({
   selector: 'app-account-page',
@@ -12,6 +12,9 @@ import { GlobalConstants, getFormattedDay, getFormattedMinutes } from 'src/app/g
 })
 export class AccountPageComponent implements OnInit {
   public churchId: string = '5b8c73d3-9e6a-4b8c-b44c-6637132ec60e'
+
+  public headers: any = null;
+  public options: any = null;
 
   public churchInfo: any = null;
   public churchServices: any = null;
@@ -26,6 +29,14 @@ export class AccountPageComponent implements OnInit {
 
   ngOnInit() {    
     this.checkForUrlToken();
+
+    this.headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': getTokenId(this.cookieService.get("adminToken"))
+    });
+
+    this.options = { headers: this.headers };
+
     this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe((response) => {
       this.churchInfo = response;
     });
@@ -39,16 +50,16 @@ export class AccountPageComponent implements OnInit {
       }
     });
 
-    this.http.get(GlobalConstants.GETAdminsByChurchId + this.churchId).subscribe((response) => {
+    this.http.get(GlobalConstants.GETAdminsByChurchId + this.churchId, this.options).subscribe((response) => {
       this.churchAdmins = response;
     });
 
-    this.http.get(GlobalConstants.GETDriversByChurchId + this.churchId).subscribe((response) => {
+    this.http.get(GlobalConstants.GETDriversByChurchId + this.churchId, this.options).subscribe((response) => {
       this.churchDrivers = response;
     });
-
-    this.http.get(GlobalConstants.GETGuestRideRequests).subscribe((response) => {
-      this.rideRequests = response
+    
+    this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe((response) => {
+      this.rideRequests = response;
     });
   }
 
@@ -68,7 +79,6 @@ export class AccountPageComponent implements OnInit {
 
   onChurchInfoSubmit(data: any) {
     let url = GlobalConstants.PATCHChurchObject + this.churchId;
-    let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "name": data.name,
       "state": data.state,
@@ -79,7 +89,7 @@ export class AccountPageComponent implements OnInit {
       "website": data.website,
     }
 
-    this.http.patch(url, formattedData, {'headers':headers}).subscribe(
+    this.http.patch(url, formattedData, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -90,14 +100,13 @@ export class AccountPageComponent implements OnInit {
 
   onAddServiceSubmit(data: any) {
     let url = GlobalConstants.POSTService;
-    let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
       "start_time": getFormattedMinutes(data.day, data.time),
       "description": data.name,
     }
     
-    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+    this.http.post(url, formattedData, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -108,7 +117,7 @@ export class AccountPageComponent implements OnInit {
 
   onDeleteService(serviceId: any) {
     let url = GlobalConstants.DELETEService + serviceId
-    this.http.delete(url).subscribe(
+    this.http.delete(url, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -119,14 +128,12 @@ export class AccountPageComponent implements OnInit {
 
   onAddAdminSubmit(data: any) {
     let url = GlobalConstants.POSTAdmins;
-    let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
       "username": data.username,
     }
     
-    console.warn(formattedData)
-    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+    this.http.post(url, formattedData, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -144,7 +151,7 @@ export class AccountPageComponent implements OnInit {
 
   onDeleteAdmin(username: any) {
     let url = GlobalConstants.DELETEAdmin + username
-    this.http.delete(url).subscribe(
+    this.http.delete(url, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -155,14 +162,13 @@ export class AccountPageComponent implements OnInit {
 
   onAddDriverSubmit(data: any) {
     let url = GlobalConstants.POSTDrivers;
-    let headers = { 'Content-Type': 'application/json' }
     let formattedData = {
       "church_id": this.churchId,
       "username": data.username,
     }
     
     console.warn(formattedData)
-    this.http.post(url, formattedData, {'headers':headers}).subscribe(
+    this.http.post(url, formattedData, this.options).subscribe(
       (response) => {
         console.log(response); 
         location.reload();  
@@ -179,14 +185,15 @@ export class AccountPageComponent implements OnInit {
   }
 
   onDeleteDriver(username: any) {
-    let url = GlobalConstants.DELETEDriver
+    let url = GlobalConstants.DELETEDriver;
     let params = new HttpParams().set('username', username).set('churchId', this.churchId);
-    this.http.delete(url, { params }).subscribe(
-      (response) => {
-        console.log(response); 
-        location.reload();  
-      },
-      (error) => console.log(error)
+    let options = { headers: this.headers, params: params };
+    this.http.delete(url, options).subscribe(
+        (response) => {
+            console.log(response); 
+            location.reload();  
+        },
+        (error) => console.log(error)
     );
   }
 
