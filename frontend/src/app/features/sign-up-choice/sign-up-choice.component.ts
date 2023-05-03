@@ -29,16 +29,22 @@ export class SignUpChoiceComponent implements OnInit {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
         this.cookieService.set("driverToken", fragment);
-        this._router.navigateByUrl('/account').then(() => {
+        this._router.navigateByUrl('/account').then(() => { //Change to driver
           window.location.reload();
         });
       }
     })
 
     // Works after page refresh (if given token in url)
+    console.log("User:");
+    this.jwtService.setToken(this.cookieService.get("userToken"));
+    if(this.cookieService.get("userToken")) console.log(this.jwtService.getDecodeToken());
+    console.log("Driver:");
     this.jwtService.setToken(this.cookieService.get("driverToken"));
-    // Prints token
     if(this.cookieService.get("driverToken")) console.log(this.jwtService.getDecodeToken());
+    console.log("Admin:");
+    this.jwtService.setToken(this.cookieService.get("adminToken"));
+    if(this.cookieService.get("adminToken")) console.log(this.jwtService.getDecodeToken());
   }
 
 }
