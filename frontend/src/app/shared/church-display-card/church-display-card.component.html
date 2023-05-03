@@ -48,15 +48,15 @@
             </select>
           </div>
           <div class="col-md-12"><legend><br>Personal Information</legend></div>
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="!this.isSignedIn">
             <label for="inputFirstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="inputFirstName" required="" name="firstName" ngModel>
           </div>
-          <div class="mb-3 col-md-6">
+          <div class="mb-3 col-md-6" *ngIf="!this.isSignedIn">
             <label for="inputLastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="inputLastName" required="" name="lastName" ngModel>
           </div>
-          <div class="mb-3 col-md-6">
+          <div class="mb-3 col-md-6" *ngIf="!this.isSignedIn">
             <label for="inputPhoneNumber" class="form-label">Phone Number</label>
             <input type="tel" class="form-control" id="inputPhoneNumber" maxlength="10" required="" name="phoneNumber" ngModel>
           </div>

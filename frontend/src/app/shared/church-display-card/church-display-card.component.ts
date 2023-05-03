@@ -75,9 +75,6 @@ export class ChurchDisplayCardComponent implements OnInit {
       'Authorization': getTokenId(this.cookieService.get("userToken"))
     });
     let formattedData = {
-        "firstName": data.firstName,
-        "lastName": data.lastName,
-        "phoneNumber": data.phoneNumber,
         "personCount": data.personCount,
         "street": data.street,
         "city": data.city,
