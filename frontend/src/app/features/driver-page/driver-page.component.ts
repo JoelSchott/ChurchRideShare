@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { GlobalConstants, getTokenId } from 'src/app/global';
+import { JwtTokenService } from 'src/app/services/jwt-token.service';
 
 @Component({
   selector: 'app-driver-page',
@@ -9,7 +10,7 @@ import { GlobalConstants, getTokenId } from 'src/app/global';
   styleUrls: ['./driver-page.component.scss']
 })
 export class DriverPageComponent {
-  public churchId: string = '5b8c73d3-9e6a-4b8c-b44c-6637132ec60e'
+  public churchId: any = null;
 
   public headers: any = null;
   public options: any = null;
@@ -19,12 +20,23 @@ export class DriverPageComponent {
   public userRideRequests: any = null;
   
   constructor(private http: HttpClient,
+              private jwtService: JwtTokenService,
               private cookieService: CookieService,) {}
 
   ngOnInit() {    
+    let decodedToken: any = this.jwtService.getDecodeToken()
+    let username: any = decodedToken['cognito:username']
+    console.log('signed in as driver user: ', username)
+
+    this.http.get(GlobalConstants.GETDriversByUsername + username).subscribe((response) => {
+      let res: any = response
+      this.churchId = res[0]['churchId'];
+      console.log('church id set: ', this.churchId)
+    });
+
     this.headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
-      'Authorization': getTokenId(this.cookieService.get("adminToken"))
+      'Authorization': getTokenId(this.cookieService.get("driverToken"))
     });
 
     this.options = { headers: this.headers };
