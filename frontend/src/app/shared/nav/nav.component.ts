@@ -16,14 +16,15 @@ export class NavComponent implements OnInit {
     if(this.cookieService.get("userToken") || this.cookieService.get("driverToken") || this.cookieService.get("adminToken")){
       this.isSignedIn = true;
     }
+    else this.isSignedIn = false;
 
     if(this.cookieService.get("driverToken") || this.cookieService.get("adminToken")) this.homeLink = "/account";
     else this.homeLink = "/home";
   }
 
   logout(){
-    this.cookieService.deleteAll();
     this.isSignedIn = false;
+    this.cookieService.deleteAll();
     this.homeLink = "/home";
   }
 
