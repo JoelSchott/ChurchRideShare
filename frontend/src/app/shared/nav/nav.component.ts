@@ -18,7 +18,8 @@ export class NavComponent implements OnInit {
     }
     else this.isSignedIn = false;
 
-    if(this.cookieService.get("driverToken") || this.cookieService.get("adminToken")) this.homeLink = "/account";
+    if(this.cookieService.get("adminToken")) this.homeLink = "/account";
+    else if(this.cookieService.get("driverToken")) this.homeLink = "/driver";
     else this.homeLink = "/home";
   }
 
