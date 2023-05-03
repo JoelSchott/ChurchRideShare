@@ -16,7 +16,8 @@ export class AccountPageComponent implements OnInit {
 
   public churchInfo: any = null;
   public churchServices: any = null;
-  public rideRequests: any = null;
+  public guestRideRequests: any = null;
+  public userRideRequests: any = null;
   public churchAdmins: any = null;
   public churchDrivers: any = null;
   
@@ -53,7 +54,11 @@ export class AccountPageComponent implements OnInit {
     });
     
     this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe((response) => {
-      this.rideRequests = response;
+      this.guestRideRequests = response;
+    });
+    
+    this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe((response) => {
+      this.userRideRequests = response;
     });
   }
 

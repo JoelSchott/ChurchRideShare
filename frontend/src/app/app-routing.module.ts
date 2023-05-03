@@ -5,6 +5,7 @@ import { SignUpChoiceComponent } from './features/sign-up-choice/sign-up-choice.
 import { FindRidePageComponent } from './features/find-ride-page/find-ride-page.component';
 import { AccountPageComponent } from './features/account-page/account-page.component';
 import { SignInChoiceComponent } from './features/sign-in-choice/sign-in-choice.component';
+import { DriverPageComponent } from './features/driver-page/driver-page.component';
 
 const routes: Routes = [
     { path: 'home', component: HomePageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: 'sign-in', component: SignInChoiceComponent },
     { path: 'find-ride', component: FindRidePageComponent },
     { path: 'account', component: AccountPageComponent },
+    { path: 'driver', component: DriverPageComponent },
     { path: '', component: HomePageComponent },
     { path: '**', component: HomePageComponent },
       // { path: '**', component: PageNotFoundComponent }

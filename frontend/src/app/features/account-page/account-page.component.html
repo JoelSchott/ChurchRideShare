@@ -6,9 +6,9 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#overview" [class.active]="isActiveTab('overview')" (click)="setActiveTab('overview')">Account Overview</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#user" [class.active]="isActiveTab('user')" (click)="setActiveTab('user')">Change Login</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="tab" href="#church-address" [class.active]="isActiveTab('church-address')" (click)="setActiveTab('church-address')">Church Info</a>
           </li>
@@ -22,14 +22,14 @@
             <a class="nav-link" data-bs-toggle="tab" href="#manage-drivers" [class.active]="isActiveTab('manage-drivers')" (click)="setActiveTab('manage-drivers')">Manage Drivers</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#manage-ride-requests" [class.active]="isActiveTab('manage-ride-requests')" (click)="setActiveTab('manage-ride-requests')">Ride Requests</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#ride-requests" [class.active]="isActiveTab('ride-requests')" (click)="setActiveTab('ride-requests')">Ride Requests</a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
         <div class="tab-content mt-3">
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('overview')}" id="overview">
-            <h1>Account Overview</h1>
+            <h1>Admin Account Overview</h1>
             <hr>
             <h3>{{ churchInfo?.name }}</h3>
             <p>
@@ -41,10 +41,10 @@
               <a href="{{ churchInfo?.website }}" target="_blank">{{ churchInfo?.website }}</a>
             </p>
           </div>
-          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('user')}" id="user">
+          <!-- <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('user')}" id="user">
             <h1>Change Login</h1>
             <a href="#">Change Login Info</a>
-          </div>
+          </div> -->
           <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('church-address')}" id="church-address">
             <h1>Church Info</h1>
             <form #churchInfoPost='ngForm' (ngSubmit)="onChurchInfoSubmit(churchInfoPost.value)">
@@ -199,7 +199,7 @@
               <button type="submit" class="btn btn-primary">Add Driver</button>
             </form>
           </div>
-          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('manage-ride-requests')}" id="manage-ride-requests">
+          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('ride-requests')}" id="ride-requests">
             <h1>Ride Requests</h1>
             <!-- Table for listing ride requests -->
             <table class="table">
@@ -215,7 +215,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let r of rideRequests">
+                <tr *ngFor="let r of userRideRequests">
                   <td>{{ r.serviceId }}</td>
                   <td>{{ r.firstName }} {{ r.lastName }}</td>
                   <td>{{ r.personCount }}</td>
@@ -224,7 +224,17 @@
                   <td>{{ r.description }}</td>
                   <td>
                     <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger">Unavailable</button>
+                  </td>
+                </tr>
+                <tr *ngFor="let r of guestRideRequests">
+                  <td>{{ r.serviceId }}</td>
+                  <td>{{ r.firstName }} {{ r.lastName }}</td>
+                  <td>{{ r.personCount }}</td>
+                  <td>{{ r.phoneNumber }}</td>
+                  <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
+                  <td>{{ r.description }}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
                   </td>
                 </tr>
               </tbody>

@@ -18,6 +18,7 @@ import { ChurchDisplayCardComponent } from './shared/church-display-card/church-
 import { AccountPageComponent } from './features/account-page/account-page.component';
 import { JwtTokenService } from './services/jwt-token.service';
 import { CookieService } from 'ngx-cookie-service';
+import { DriverPageComponent } from './features/driver-page/driver-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CookieService } from 'ngx-cookie-service';
     ChurchSearchFilterPipe,
     ChurchDisplayCardComponent,
     AccountPageComponent,
+    DriverPageComponent,
   ],
   imports: [
     BrowserModule,
