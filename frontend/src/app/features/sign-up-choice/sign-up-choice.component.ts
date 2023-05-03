@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalConstants } from 'src/app/global';
 import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sign-up-choice',
@@ -16,7 +17,8 @@ export class SignUpChoiceComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               private jwtService: JwtTokenService,
-              private cookieService: CookieService,) { }
+              private cookieService: CookieService,
+              private _router: Router,) { }
 
   ngOnInit(): void {
     this.checkForUrlToken();
@@ -27,6 +29,9 @@ export class SignUpChoiceComponent implements OnInit {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
         this.cookieService.set("driverToken", fragment);
+        this._router.navigateByUrl('/account').then(() => {
+          window.location.reload();
+        });
       }
     })
 

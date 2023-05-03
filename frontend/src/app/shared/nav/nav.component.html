@@ -1,7 +1,7 @@
 <!-- Navbar (sticky top) -->
 <nav class="navbar navbar-expand-lg navbar-dark w3-animate-opacity topNav">
   <div class="container">
-    <a routerLink="/home" class="navbar-brand">
+    <a routerLink="{{homeLink}}" class="navbar-brand">
       <i class="fs-4 fa fa-home icon">
         <span class="d-none d-sm-inline linkText">Home</span>
       </i>
@@ -11,14 +11,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">
-        <a routerLink="/sign-up" class="nav-link">
+        <a routerLink="/sign-up" class="nav-link" *ngIf="!isSignedIn">
           <i class="fs-4 fa fa-car icon">
             <span class="linkText">Sign Up</span>
           </i>
         </a>
-        <a routerLink="/sign-in" class="nav-link">
+        <a routerLink="/sign-in" class="nav-link" *ngIf="!isSignedIn">
           <i class="fs-4 fa fa-user icon">
             <span class="linkText">Sign In</span>
+          </i>
+        </a>
+        <a href="/home" class="nav-link" (click)="logout()" *ngIf="isSignedIn">
+          <i class="fs-4 fa fa-right-from-bracket icon">
+            <span class="linkText">Log Out</span>
           </i>
         </a>
       </div>

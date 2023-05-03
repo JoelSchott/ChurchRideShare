@@ -1,11 +1,11 @@
 export class GlobalConstants {
   public static riderSignUpCognitoUrl: string = "https://church-riders.auth.us-east-2.amazoncognito.com/signup?client_id=74sg13742hu871a4o7inhupvv1&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Ffrontend";    
   public static driverSignUpCognitoUrl: string = "https://drivers.auth.us-east-2.amazoncognito.com/signup?client_id=igptd8i5uhmar0lllie8pn2hg&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Fsign-up";
-  public static churchSignUpCognitoUrl: string = "https://church-ride-share.auth.us-east-2.amazoncognito.com/signup?client_id=7f0bf0jhgm544f4rimqqmeoqjk&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Faccount";
+  public static churchSignUpCognitoUrl: string = "https://church-ride-share.auth.us-east-2.amazoncognito.com/signup?client_id=7f0bf0jhgm544f4rimqqmeoqjk&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Fsign-in";
 
   public static riderSignInCognitoUrl: string = "https://church-riders.auth.us-east-2.amazoncognito.com/login?client_id=74sg13742hu871a4o7inhupvv1&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Ffrontend";
   public static driverSignInCognitoUrl: string = "https://drivers.auth.us-east-2.amazoncognito.com/login?client_id=igptd8i5uhmar0lllie8pn2hg&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Fsign-up";
-  public static churchSignInCognitoUrl: string = "https://church-ride-share.auth.us-east-2.amazoncognito.com/login?client_id=7f0bf0jhgm544f4rimqqmeoqjk&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Faccount";
+  public static churchSignInCognitoUrl: string = "https://church-ride-share.auth.us-east-2.amazoncognito.com/login?client_id=7f0bf0jhgm544f4rimqqmeoqjk&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https%3A%2F%2Fmain.d3uai0gomuhytq.amplifyapp.com%2Fsign-in";
 
   public static GETChurchObjects: string = 'https://xyae35uw4b.execute-api.us-east-2.amazonaws.com/test1/church';
   public static GETChurchObject: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/churches?id='; //+ church_id

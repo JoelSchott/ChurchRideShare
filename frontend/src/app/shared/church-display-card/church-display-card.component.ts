@@ -20,7 +20,6 @@ export class ChurchDisplayCardComponent implements OnInit {
   public today= new Date();
   public jstoday = '';
 
-  //----------RECONFIGURE WHEN AUTH IMPLEMENTED----------
   public isSignedIn = false;
 
   constructor(private http: HttpClient, 
@@ -47,6 +46,10 @@ export class ChurchDisplayCardComponent implements OnInit {
     this.http.get(url).subscribe((response) => {
       this.churchServices = response;
     });
+  }
+
+  ngOnChange(): void{
+
   }
 
   // Convert backend service data to readible time
