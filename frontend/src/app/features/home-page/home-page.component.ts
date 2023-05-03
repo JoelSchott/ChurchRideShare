@@ -24,8 +24,8 @@ export class HomePageComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
-        this.cookieService.set("userToken", fragment, {path: '/home'});
-        this._router.navigateByUrl('/home').then(() => { //Change to driver
+        this.cookieService.set("userToken", fragment, {path: '/'});
+        this._router.navigateByUrl('/home').then(() => {
           window.location.reload();
         });
       }

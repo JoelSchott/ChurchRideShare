@@ -28,8 +28,8 @@ export class SignUpChoiceComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
-        this.cookieService.set("driverToken", fragment);
-        this._router.navigateByUrl('/account').then(() => { //Change to driver
+        this.cookieService.set("driverToken", fragment, {path: '/'});
+        this._router.navigateByUrl('/driver').then(() => {
           window.location.reload();
         });
       }
