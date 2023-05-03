@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
 
   logout(){
     this.isSignedIn = false;
-    this.cookieService.deleteAll();
+    this.cookieService.deleteAll('/');
     this.homeLink = "/home";
   }
 
