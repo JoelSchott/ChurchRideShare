@@ -35,6 +35,8 @@ export class GlobalConstants {
 
   // Below PATCH request should require token
   public static PATCHChurchObject: string = "https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/churches?id="; //+ church_id
+  public static PATCHUserRideRequests: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/user-ride-requests?id=';
+  public static PATCHGuestRideRequest: string = 'https://2z9cb2krga.execute-api.us-east-2.amazonaws.com/test1/guest-ride-request?id=';
 }
 
 export function getFormattedDay(minutes: any) {

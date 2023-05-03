@@ -1,74 +1,60 @@
 <div class="driver-page">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="nav nav-pills flex-column mt-3" id="account-tabs">
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#overview" [class.active]="isActiveTab('overview')" (click)="setActiveTab('overview')">Account Overview</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#ride-requests" [class.active]="isActiveTab('ride-requests')" (click)="setActiveTab('ride-requests')">Ride Requests</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-9">
-        <div class="tab-content mt-3">
-          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('overview')}" id="overview">
-            <h1>Driver Account Overview</h1>
-            <hr>
-            <h3>{{ churchInfo?.name }}</h3>
-            <p>
-              {{ churchInfo?.description }} <br>
-              {{ churchInfo?.street }} <br>
-              {{ churchInfo?.city }}
-              {{ churchInfo?.state }}
-              {{ churchInfo?.zipCode }} <br>
-              <a href="{{ churchInfo?.website }}" target="_blank">{{ churchInfo?.website }}</a>
-            </p>
-          </div>
-          <div class="tab-pane fade" [ngClass]="{'active show': isActiveTab('ride-requests')}" id="ride-requests">
-            <h1>Ride Requests</h1>
-            <!-- Table for listing ride requests -->
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Service</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Person Count</th>
-                  <th scope="col">Phone Number</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Notes</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let r of userRideRequests">
-                  <td>{{ r.serviceId }}</td>
-                  <td>{{ r.firstName }} {{ r.lastName }}</td>
-                  <td>{{ r.personCount }}</td>
-                  <td>{{ r.phoneNumber }}</td>
-                  <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
-                  <td>{{ r.description }}</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
-                  </td>
-                </tr>
-                <tr *ngFor="let r of guestRideRequests">
-                  <td>{{ r.serviceId }}</td>
-                  <td>{{ r.firstName }} {{ r.lastName }}</td>
-                  <td>{{ r.personCount }}</td>
-                  <td>{{ r.phoneNumber }}</td>
-                  <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
-                  <td>{{ r.description }}</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2">Accept</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <h1>Driver Account Overview</h1>
+    <hr>
+    <h3>{{ churchInfo?.name }}</h3>
+    <p>
+      {{ churchInfo?.description }} <br>
+      {{ churchInfo?.street }} <br>
+      {{ churchInfo?.city }}
+      {{ churchInfo?.state }}
+      {{ churchInfo?.zipCode }} <br>
+      <a href="{{ churchInfo?.website }}" target="_blank">{{ churchInfo?.website }}</a>
+    </p>
+    <hr>
+    
+    <h1>Ride Requests</h1>
+    <!-- Table for listing ride requests -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Service</th>
+          <th scope="col">Name</th>
+          <th scope="col">Person Count</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Location</th>
+          <th scope="col">Notes</th>
+          <th scope="col">Accepted By</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of userRideRequests">
+          <td>{{ r.serviceId }}</td>
+          <td>{{ r.firstName }} {{ r.lastName }}</td>
+          <td>{{ r.personCount }}</td>
+          <td>{{ r.phoneNumber }}</td>
+          <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
+          <td>{{ r.description }}</td>
+          <td>{{ r.accepted_by }}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2" (click)="onAcceptUserRideRequest(r.id)">Accept</button>
+          </td>
+        </tr>
+        <tr *ngFor="let r of guestRideRequests">
+          <td>{{ r.serviceId }}</td>
+          <td>{{ r.firstName }} {{ r.lastName }}</td>
+          <td>{{ r.personCount }}</td>
+          <td>{{ r.phoneNumber }}</td>
+          <td>{{ r.street }} {{ r.city }} {{ r.state }} {{ r.zipCode }}</td>
+          <td>{{ r.description }}</td>
+          <td>{{ r.accepted_by }}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-outline-success me-2 mb-2" (click)="onAcceptGuestRideRequest(r.id)">Accept</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

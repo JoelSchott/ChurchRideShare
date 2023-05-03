@@ -11,6 +11,7 @@ import { JwtTokenService } from 'src/app/services/jwt-token.service';
 })
 export class DriverPageComponent {
   public churchId: any = null;
+  public username: any = null;
 
   public headers: any = null;
   public options: any = null;
@@ -26,9 +27,10 @@ export class DriverPageComponent {
   ngOnInit() {
     this.jwtService.setToken(this.cookieService.get("driverToken"));
     let decodedToken: any = this.jwtService.getDecodeToken()
-    let username: any = decodedToken['cognito:username']
+    this.username = decodedToken['cognito:username']
 
-    console.log('signed in as driver user: ', username)
+    console.log('signed in as driver user: ', this.username)
+    console.log(this.cookieService.get("driverToken"))
 
     this.headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
@@ -41,7 +43,8 @@ export class DriverPageComponent {
       console.log(response)
       let res: any = response
       console.log(res[0])
-      this.churchId = res[0]['churchId'];
+      // this.churchId = res[0]['churchId'];
+      this.churchId = 'd0f31d23-cd03-4d72-8d2e-934ccd980071'
       console.log('church id set: ', this.churchId)
 
       this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe(
@@ -52,13 +55,13 @@ export class DriverPageComponent {
         (error) => console.log(error)
       );
       
-      this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe(
-        (response) => {
-          console.log(response)
-          this.userRideRequests = response;
-        },
-        (error) => console.log(error)
-      );
+      // this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe(
+      //   (response) => {
+      //     console.log(response)
+      //     this.userRideRequests = response;
+      //   },
+      //   (error) => console.log(error)
+      // );
       
       this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe(
         (response) => {
@@ -73,19 +76,32 @@ export class DriverPageComponent {
   }
 
   // TODO: finish this once Jacob adds patch api call
-  onAcceptRideRequest(rideRequest: any) {
-    return
-    // let url = GlobalConstants.PATCHRideRequest
-    // let formattedData = {
-    //   "accepted by": data.username,
-    // }
-    // this.http.patch(url, formattedData, this.options).subscribe(
-    //   (response) => {
-    //     console.log(response); 
-    //     location.reload();  
-    //   },
-    //   (error) => console.log(error)
-    // )
+  onAcceptUserRideRequest(rideRequestId: any) {
+    let url = GlobalConstants.PATCHUserRideRequests + rideRequestId;
+    let formattedData = {
+      "acceptedBy": this.username,
+    }
+    this.http.patch(url, formattedData, this.options).subscribe(
+      (response) => {
+        console.log(response); 
+        location.reload();  
+      },
+      (error) => console.log(error)
+    )
+  }
+
+  onAcceptGuestRideRequest(rideRequestId: any) {
+    let url = GlobalConstants.PATCHGuestRideRequest + rideRequestId;
+    let formattedData = {
+      "acceptedBy": this.username,
+    }
+    this.http.patch(url, formattedData, this.options).subscribe(
+      (response) => {
+        console.log(response); 
+        location.reload();  
+      },
+      (error) => console.log(error)
+    )
   }
 
   // Show the user the same tab they were previously on after page reload
