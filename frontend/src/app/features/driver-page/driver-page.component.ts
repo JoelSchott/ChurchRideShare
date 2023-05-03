@@ -23,35 +23,53 @@ export class DriverPageComponent {
               private jwtService: JwtTokenService,
               private cookieService: CookieService,) {}
 
-  ngOnInit() {    
+  ngOnInit() {
+    this.jwtService.setToken(this.cookieService.get("driverToken"));
     let decodedToken: any = this.jwtService.getDecodeToken()
     let username: any = decodedToken['cognito:username']
-    console.log('signed in as driver user: ', username)
 
-    this.http.get(GlobalConstants.GETDriversByUsername + username).subscribe((response) => {
-      let res: any = response
-      this.churchId = res[0]['churchId'];
-      console.log('church id set: ', this.churchId)
-    });
+    console.log('signed in as driver user: ', username)
 
     this.headers = new HttpHeaders({ 
       'Content-Type': 'application/json',
       'Authorization': getTokenId(this.cookieService.get("driverToken"))
     });
-
     this.options = { headers: this.headers };
+    console.log('options set')
 
-    this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe((response) => {
-      this.churchInfo = response;
-    });
-    
-    this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe((response) => {
-      this.guestRideRequests = response;
-    });
-    
-    this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe((response) => {
-      this.userRideRequests = response;
-    });
+    this.http.get(GlobalConstants.GETDrivers, this.options).subscribe((response) => {
+      console.log(response)
+      let res: any = response
+      console.log(res[0])
+      this.churchId = res[0]['churchId'];
+      console.log('church id set: ', this.churchId)
+
+      this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe(
+        (response) => {
+          console.log('church retrieved', response)
+          this.churchInfo = response;
+        },
+        (error) => console.log(error)
+      );
+      
+      this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe(
+        (response) => {
+          console.log(response)
+          this.userRideRequests = response;
+        },
+        (error) => console.log(error)
+      );
+      
+      this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe(
+        (response) => {
+          console.log(response)
+          this.guestRideRequests = response;
+        },
+        (error) => console.log(error)
+      );
+    },
+    (error) => console.log(error)
+    );
   }
 
   // TODO: finish this once Jacob adds patch api call

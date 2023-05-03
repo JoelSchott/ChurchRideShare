@@ -27,50 +27,73 @@ export class AccountPageComponent implements OnInit {
               private cookieService: CookieService,) {}
 
   ngOnInit() {
+    this.jwtService.setToken(this.cookieService.get("adminToken"));
     let decodedToken: any = this.jwtService.getDecodeToken()
     let username: any = decodedToken['cognito:username']
+
     console.log('signed in as admin user: ', username)
+
+    this.headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': getTokenId(this.cookieService.get("adminToken"))
+    });
+    this.options = { headers: this.headers };
+    console.log('options set')
 
     this.http.get(GlobalConstants.GETAdminsByUsername + username).subscribe((response) => {
       let res: any = response
       this.churchId = res[0]['churchId'];
       console.log('church id set: ', this.churchId)
-    });
+
+      this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe(
+        (response) => {
+          console.log('church retrieved', response)
+          this.churchInfo = response;
+        },
+        (error) => console.log(error)
+      );
+
+      this.http.get(GlobalConstants.GETChurchServices + this.churchId).subscribe(
+        (response) => {
+          this.churchServices = response;
     
-    this.headers = new HttpHeaders({ 
-      'Content-Type': 'application/json',
-      'Authorization': getTokenId(this.cookieService.get("adminToken"))
-    });
-
-    this.options = { headers: this.headers };
-
-    this.http.get(GlobalConstants.GETChurchObject + this.churchId).subscribe((response) => {
-      this.churchInfo = response;
-    });
-
-    this.http.get(GlobalConstants.GETChurchServices + this.churchId).subscribe((response) => {
-      this.churchServices = response;
-
-      for (let service of this.churchServices) {
-        const minutes = service.startTime;
-        service.startTime = getFormattedDay(minutes);
-      }
-    });
-
-    this.http.get(GlobalConstants.GETAdminsByChurchId + this.churchId, this.options).subscribe((response) => {
-      this.churchAdmins = response;
-    });
-
-    this.http.get(GlobalConstants.GETDriversByChurchId + this.churchId, this.options).subscribe((response) => {
-      this.churchDrivers = response;
-    });
-    
-    this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe((response) => {
-      this.guestRideRequests = response;
-    });
-    
-    this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe((response) => {
-      this.userRideRequests = response;
+          for (let service of this.churchServices) {
+            const minutes = service.startTime;
+            service.startTime = getFormattedDay(minutes);
+          }
+        },
+        (error) => console.log(error)
+      );
+  
+      this.http.get(GlobalConstants.GETAdminsByChurchId + this.churchId, this.options).subscribe(
+        (response) => {
+          this.churchAdmins = response;
+        },
+        (error) => console.log(error)
+      );
+  
+      this.http.get(GlobalConstants.GETDriversByChurchId + this.churchId, this.options).subscribe(
+        (response) => {
+          this.churchDrivers = response;
+        },
+        (error) => console.log(error)
+      );
+      
+      this.http.get(GlobalConstants.GETUserRideRequests, this.options).subscribe(
+        (response) => {
+          console.log(response)
+          this.userRideRequests = response;
+        },
+        (error) => console.log(error)
+      );
+      
+      this.http.get(GlobalConstants.GETGuestRideRequests, this.options).subscribe(
+        (response) => {
+          console.log(response)
+          this.guestRideRequests = response;
+        },
+        (error) => console.log(error)
+      );
     });
   }
 
