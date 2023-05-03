@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JwtTokenService } from 'src/app/services/jwt-token.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +13,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               private jwtService: JwtTokenService,
-              private cookieService: CookieService,) { }
+              private cookieService: CookieService,
+              private _router: Router,) { }
 
   ngOnInit(): void {
     this.checkForUrlToken();
@@ -22,7 +24,10 @@ export class HomePageComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
-        this.cookieService.set("userToken", fragment);
+        this.cookieService.set("userToken", fragment, {path: '/home'});
+        this._router.navigateByUrl('/home').then(() => { //Change to driver
+          window.location.reload();
+        });
       }
     })
 

@@ -28,7 +28,7 @@ export class SignInChoiceComponent implements OnInit {
     this.route.fragment.subscribe((fragment) => {
       if(fragment){
         // Saving token in cookies allows to retrieve token even after page refresh
-        this.cookieService.set("adminToken", fragment);
+        this.cookieService.set("adminToken", fragment, {path: '/'});
         this._router.navigateByUrl('/account').then(() => {
           window.location.reload();
         });
@@ -45,6 +45,6 @@ export class SignInChoiceComponent implements OnInit {
     console.log("Admin:");
     this.jwtService.setToken(this.cookieService.get("adminToken"));
     if(this.cookieService.get("adminToken")) console.log(this.jwtService.getDecodeToken());
-    
+
   }
 }
